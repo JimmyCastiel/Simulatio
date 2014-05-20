@@ -9,6 +9,8 @@ import Model.Intersections.Intersection;
 import Model.Signalisations.Signalisation;
 import Model.Vehicules.Vehicule;
 import Model.VoieDeCirculation;
+import Model.ZoneSpecifiques.Station;
+import Model.ZoneSpecifiques.ZoneARisque;
 import java.util.List;
 import java.util.Map;
 
@@ -25,16 +27,19 @@ public class Route extends VoieDeCirculation {
 
     private Map<Vehicule, Double> voie;
     private List<Signalisation> signalisations;
+    private List<ZoneARisque> zonesARisque;
+    private List<Station> stations;
 
     private boolean routePleine;
 
-    public Route(Intersection depart, Intersection arrivee, Map<Vehicule, Double> voie, List<Signalisation> signalisations) {
+    public Route(Intersection depart, Intersection arrivee, double longueur, Map<Vehicule, Double> voie, List<Signalisation> signalisations, List<ZoneARisque> zonesARisque, List<Station> stations) {
         this.depart = depart;
         this.arrivee = arrivee;
+        this.longueur = longueur;
         this.voie = voie;
         this.signalisations = signalisations;
-        this.routePleine = false;
+        this.zonesARisque = zonesARisque;
+        this.stations = stations;
     }
 
-    
 }
