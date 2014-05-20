@@ -11,5 +11,7 @@ package Model;
  * @author Benjamin
  */
 public class Carte {
-    
+    public void coucou(){
+        
+    }
 }
