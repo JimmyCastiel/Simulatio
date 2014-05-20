@@ -5,10 +5,17 @@
  */
 package Model.Intersections;
 
+import Model.Routes.Route;
+import java.util.List;
+
 /**
  *
  * @author Benjamin
  */
 public class RondPoint extends Intersection {
+
+    public RondPoint(List<Route> routes, int nbMinRoutes) {
+        super(routes, nbMinRoutes);
+    }
 
 }

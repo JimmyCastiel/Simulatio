@@ -5,10 +5,17 @@
  */
 package Model.Intersections;
 
+import Model.Routes.Route;
+import java.util.List;
+
 /**
  *
  * @author Benjamin
  */
 public class Croisement extends Intersection {
+
+    public Croisement(List<Route> routes, int nbMinRoutes) {
+        super(routes, nbMinRoutes);
+    }
 
 }

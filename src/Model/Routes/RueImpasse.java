@@ -6,9 +6,19 @@
 
 package Model.Routes;
 
+import Model.Intersections.Intersection;
+import Model.Signalisations.Signalisation;
+import Model.Vehicules.Vehicule;
+import java.util.List;
+import java.util.Map;
+
 /**
  *
  * @author Benjamin
  */
 public class RueImpasse extends Route {
+
+    public RueImpasse(Intersection depart, Intersection arrivee, Map<Vehicule, Double> voie, List<Signalisation> signalisations) {
+        super(depart, arrivee, voie, signalisations);
+    }
 }

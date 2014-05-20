@@ -3,13 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Model.Intersections;
+
+import Model.Routes.Route;
+import java.util.List;
 
 /**
  *
  * @author Benjamin
  */
-public class Intersection {
-    
+public abstract class Intersection {
+
+    private List<Route> routes;
+    private int nbMinRoutes;
+
+    public Intersection(List<Route> routes, int nbMinRoutes) {
+        this.routes = routes;
+        this.nbMinRoutes = nbMinRoutes;
+    }
 }
