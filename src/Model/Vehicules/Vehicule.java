@@ -2,7 +2,7 @@ package Model.Vehicules;
 import java.io.Serializable;
 
 
-public class Vehicule implements Serializable {
+public class Vehicule {
 	
 	private double longueur;
 	private double vitesse;
