@@ -6,6 +6,7 @@
 package Model.Routes;
 
 import Model.Intersections.Intersection;
+import Model.Signalisations.Panneau;
 import Model.Signalisations.Signalisation;
 import Model.Vehicules.Vehicule;
 import Model.VoieDeCirculation;
@@ -41,5 +42,10 @@ public class Route extends VoieDeCirculation {
         this.zonesARisque = zonesARisque;
         this.stations = stations;
     }
-
+    
+    public boolean ajouterPanneau(Signalisation s){
+        if(signalisations.add(s))
+            return true;
+        return false;
+    }
 }
