@@ -10,6 +10,7 @@ import Model.Intersections.Croisement;
 import Model.Intersections.Intersection;
 import Model.Routes.Route;
 import Model.Signalisations.Panneau;
+import Model.Signalisations.Signalisation;
 import java.util.List;
 
 /**
@@ -18,10 +19,8 @@ import java.util.List;
  */
 public class Carte {
     private List<Route> listeRoutes;
-    private List<Croisement> listeCroisements;
-    private List<Panneau> listePanneaux;
     private List<Intersection> listeDesIntersections;
-    private
+    private List<Signalisation> listeSignalisations;
     
 
 }
