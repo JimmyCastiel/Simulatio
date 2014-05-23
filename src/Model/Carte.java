@@ -6,10 +6,8 @@
 
 package Model;
 
-import Model.Intersections.Croisement;
 import Model.Intersections.Intersection;
 import Model.Routes.Route;
-import Model.Signalisations.Panneau;
 import Model.Signalisations.Signalisation;
 import java.util.List;
 
