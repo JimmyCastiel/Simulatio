@@ -58,7 +58,7 @@ public class Carte {
         this.listeZonesARisques = listeZonesARisques;
     }
 
-    public boolean addSignalisation(String nomR, Signalisation s){
+    public boolean addSignalisationRoute(String nomR, Signalisation s){
         if (mapRouteSignalisation.containsKey(nomR)) {
             int index = 0;
             boolean b = false;
