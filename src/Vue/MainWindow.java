@@ -10,11 +10,13 @@ import Vue.Signalisations.VueFeu;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.SystemColor;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -69,6 +71,11 @@ public class MainWindow extends CircuFrame{
     
     //Gestion
     private JPanel panelGestion;
+    private JLabel listeRoutes;
+    private JLabel listePanneaux;
+    private JLabel listeLimitationsDeVitesse;
+    private JLabel fluxCirculation;   
+    private JLabel frequenceDesFeux;   
     private String [] routes;
     private String [] panneaux;
     private String [] limitationsDeVitesse;
@@ -212,19 +219,38 @@ public class MainWindow extends CircuFrame{
         
         //Partie gestion simulation
         this.listeDeroulanteDeRoutes = new JComboBox();
+        this.listeDeroulanteDeRoutes.setPreferredSize(new Dimension(20,10));
         this.listeDeroulanteDePanneaux = new JComboBox();
+        this.listeDeroulanteDePanneaux.setPreferredSize(new Dimension(20,10));
         this.listeDeroulanteDeLimitationsDeVitesse = new JComboBox();
+        this.listeDeroulanteDeLimitationsDeVitesse.setPreferredSize(new Dimension(20,10));
         this.slideFluxCirculation = new JSlider();
+        this.slideFluxCirculation.setPreferredSize(new Dimension(20,10));
         this.slideFrequenceDesFeux = new JSlider();
+        this.slideFrequenceDesFeux.setPreferredSize(new Dimension(20,10));
+        this.listeRoutes = new JLabel("Les routes");
+        this.listePanneaux = new JLabel("Les panneaux");
+        this.listeLimitationsDeVitesse = new JLabel("Les limitations de vitesse");
+        this.fluxCirculation = new JLabel("Flux de circulation");
+        this.frequenceDesFeux = new JLabel("Fréquence des feux de signalisation");
         
-        this.panelGestion = new JPanel(new GridLayout(0,1));
-        this.panelGestion.setBackground(Color.red);
+        GridLayout g1 = new GridLayout(0,1);
+        g1.setVgap(5);
+        this.panelGestion = new JPanel(g1);
+//        this.panelGestion.setBackground(Color.red);
         
+        panelGestion.add(listeRoutes);
         panelGestion.add(listeDeroulanteDeRoutes);
+        panelGestion.add(listePanneaux);
         panelGestion.add(listeDeroulanteDePanneaux);
+        panelGestion.add(listeLimitationsDeVitesse);
         panelGestion.add(listeDeroulanteDeLimitationsDeVitesse);
+        panelGestion.add(fluxCirculation);
         panelGestion.add(slideFluxCirculation);
+        panelGestion.add(frequenceDesFeux);
         panelGestion.add(slideFrequenceDesFeux);
+        
+//        this.panelGestion.setPreferredSize(new Dimension(5,this.panelGestion.getPreferredSize().height));
         
         this.carteContainer = new JPanel();
         f = new Feu(0,1000);
@@ -240,18 +266,6 @@ public class MainWindow extends CircuFrame{
     }
     
     public void go(){
-        while(true){
-            try{
-                Thread.sleep(1000);
-            }
-            catch(InterruptedException e){
-                e.printStackTrace();
-            }
-            if(f.getCouleurFeu().equals(Color.red)){
-                f.setCouleurFeu(CouleurFeu.VERT);
-                vf.repaint();
-            }
-                
-        }
+
     }
 }
