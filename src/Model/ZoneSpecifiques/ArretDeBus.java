@@ -11,5 +11,10 @@ package Model.ZoneSpecifiques;
  * @author Benjamin
  */
 public class ArretDeBus extends Station{
+
+
+    public ArretDeBus(String nom, boolean estStationne, double longueurStation) {
+        super(nom, estStationne, longueurStation);
+    }
     
 }
