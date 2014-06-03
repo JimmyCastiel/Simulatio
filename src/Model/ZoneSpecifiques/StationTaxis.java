@@ -11,5 +11,9 @@ package Model.ZoneSpecifiques;
  * @author Benjamin
  */
 public class StationTaxis extends Station{
+
+    public StationTaxis(String nom, boolean estStationne, double longueurStation) {
+        super(nom, estStationne, longueurStation);
+    }
     
 }
