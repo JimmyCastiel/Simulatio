@@ -1,40 +1,69 @@
 package Model.Vehicules;
+
+import Model.Intineraire;
+import Model.VoieDeCirculation;
 import java.io.Serializable;
 
+public abstract class Vehicule {
 
-public class Vehicule {
-	
-	private double longueur;
-	private double vitesse;
-	private double vitesseMax;
+    private Intineraire intineraire;
 
-	public Vehicule(double longueur, double vitesse, double vitesseMax){
-		this.setLongueur(longueur);
-		this.setVitesse(vitesse);
-		this.setVitesseMax(vitesseMax);
-	}
+    private double longueur;
+    private double vitesse;
+    private double vitesseMax;
 
-	public double getLongueur() {
-		return longueur;
-	}
+    public Vehicule(Intineraire intineraire, double longueur, double vitesse, double vitesseMax) {
+        this.intineraire = intineraire;
+        this.longueur = longueur;
+        this.vitesse = vitesse;
+        this.vitesseMax = vitesseMax;
+    }
 
-	public void setLongueur(double longueur) {
-		this.longueur = longueur;
-	}
+    public double getLongueur() {
+        return longueur;
+    }
 
-	public double getVitesse() {
-		return vitesse;
-	}
+    public void setLongueur(double longueur) {
+        this.longueur = longueur;
+    }
 
-	public void setVitesse(double vitesse) {
-		this.vitesse = vitesse;
-	}
+    public double getVitesse() {
+        return vitesse;
+    }
 
-	public double getVitesseMax() {
-		return vitesseMax;
-	}
+    public void setVitesse(double vitesse) {
+        this.vitesse = vitesse;
+    }
 
-	public void setVitesseMax(double vitesseMax) {
-		this.vitesseMax = vitesseMax;
-	}	
+    public double getVitesseMax() {
+        return vitesseMax;
+    }
+
+    public void setVitesseMax(double vitesseMax) {
+        this.vitesseMax = vitesseMax;
+    }
+
+    public void setIntineraire(Intineraire intineraire) {
+        this.intineraire = intineraire;
+    }
+
+    public Intineraire getIntineraire() {
+        return intineraire;
+    }
+
+    public VoieDeCirculation getVoiePrecedente() {
+        return this.intineraire.getVoiePrecedente();
+    }
+
+    public VoieDeCirculation prochainDeplacement() {
+        return this.intineraire.prochainDeplacement();
+    }
+    
+    /**
+     * Methode "Avancer".
+     * Méthode permettant de faire avancer la voiture dans la simulation.
+     */
+    public void Avancer() {
+
+    }
 }

@@ -1,12 +1,15 @@
 package Model.Vehicules;
 
-public class Taxi extends Voiture{
+import Model.Intineraire;
 
-	/**
-	 * 
-	 */
-	
-	public Taxi(double longueur, double vitesse, double vitesseMax) {
-		super(longueur, vitesse, vitesseMax);
-	}
+public class Taxi extends Voiture {
+
+    /**
+     *
+     */
+    
+    public Taxi(Intineraire intineraire, double longueur, double vitesse, double vitesseMax) {
+        super(intineraire, longueur, vitesse, vitesseMax);
+    }
+
 }

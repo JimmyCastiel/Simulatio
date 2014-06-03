@@ -5,7 +5,6 @@
  */
 package Model;
 
-import Model.Intersections.Croisement;
 import Model.Intersections.Intersection;
 import Model.Routes.Route;
 import Model.Signalisations.Panneau;
