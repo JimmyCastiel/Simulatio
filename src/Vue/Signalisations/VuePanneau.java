@@ -20,6 +20,7 @@ public class VuePanneau extends JPanel{
     private Panneau panneau;
 
     public VuePanneau(Panneau panneau) {
+        this.setBackground(Color.blue);
         this.panneau = panneau;
     }
     public Dimension getPreferredSize() {

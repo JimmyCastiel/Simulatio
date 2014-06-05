@@ -259,11 +259,11 @@ public class MainWindow extends CircuFrame{
         //Tests
         this.carteContainer = new JPanel();
         f = new Feu(0,1000);
-        vf = new VueFeu(f);
+//        vf = new VueFeu(f);
         String s = "Cedez-le-passage";
         p = new Panneau(s);
         vp = new VuePanneau(p);
-        this.carteContainer.add(vf);
+//        this.carteContainer.add(vf);
         this.carteContainer.add(vp);
         this.carteContainer.setBackground(Color.blue);
         // CREATION splitpanes
