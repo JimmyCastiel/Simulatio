@@ -1,6 +1,6 @@
 package Model.Signalisations;
 
-public abstract class Panneau extends Signalisation {
+public class Panneau extends Signalisation {
 	
 	private String nom;
 	

@@ -6,7 +6,9 @@ package Vue;
 
 import Model.Signalisations.CouleurFeu;
 import Model.Signalisations.Feu;
+import Model.Signalisations.Panneau;
 import Vue.Signalisations.VueFeu;
+import Vue.Signalisations.VuePanneau;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -91,8 +93,11 @@ public class MainWindow extends CircuFrame{
     // SplitPane pour la carte et le panel de gestion 
     private JSplitPane 		verSplitPane;
     
+    //Test
     private Feu f;
     private VueFeu vf;
+    private VuePanneau vp;
+    private Panneau p;
     
     /*** MAINWINDOW SINGLETON ***/
     private static MainWindow INSTANCE = new MainWindow();
@@ -251,11 +256,15 @@ public class MainWindow extends CircuFrame{
         panelGestion.add(slideFrequenceDesFeux);
         
 //        this.panelGestion.setPreferredSize(new Dimension(5,this.panelGestion.getPreferredSize().height));
-        
+        //Tests
         this.carteContainer = new JPanel();
         f = new Feu(0,1000);
         vf = new VueFeu(f);
+        String s = "Cedez-le-passage";
+        p = new Panneau(s);
+        vp = new VuePanneau(p);
         this.carteContainer.add(vf);
+        this.carteContainer.add(vp);
         this.carteContainer.setBackground(Color.blue);
         // CREATION splitpanes
         this.verSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, panelGestion, carteContainer);
