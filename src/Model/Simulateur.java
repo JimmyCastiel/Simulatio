@@ -3,13 +3,62 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Model;
+
+import Model.Signalisations.Signalisation;
+import Model.Vehicules.Vehicule;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Benjamin
  */
-public class Simulateur {
-    
+public class Simulateur extends Thread {
+
+    private List<Signalisation> signalisations;
+    private List<Vehicule> vehicules;
+
+    private int densiteVoiture;
+    private long vitesse;
+    private int dureeFeux;
+
+    public Simulateur(List<Signalisation> signalisations, List<Vehicule> voitures, int densiteVoiture, long vitesse, int dureeFeux) {
+        this.signalisations = signalisations;
+        this.vehicules = voitures;
+        this.densiteVoiture = densiteVoiture;
+        this.vitesse = vitesse;
+        this.dureeFeux = dureeFeux;
+    }
+
+    public Simulateur() {
+        this(new ArrayList<Signalisation>(), new ArrayList<Vehicule>(), 100, 10, 100);
+    }
+
+    @Override
+    public synchronized void start() {
+        super.start(); //To change body of generated methods, choose Tools | Templates.
+        while (true) {
+            Date date = new Date();
+            SimpleDateFormat dateFormatComp;
+
+            dateFormatComp = new SimpleDateFormat("dd MMM yyyy hh:mm:ss a");
+            System.out.println(dateFormatComp.format(date));
+
+            for (Vehicule v : this.vehicules) {
+                v.Avancer();
+            }
+
+            try {
+                this.sleep(this.vitesse);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Simulateur.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
 }
