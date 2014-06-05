@@ -61,4 +61,10 @@ public class Simulateur extends Thread {
         }
     }
 
+    public void ajouterVehicule(Vehicule v) {
+        this.vehicules.add(v);
+        if (v.getVoiePrecedente() == null) {
+            v.prochainDeplacement().ajouterVehicule(v);
+        }
+    }
 }

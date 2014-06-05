@@ -3,13 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Model;
+
+import Model.Vehicules.Vehicule;
 
 /**
  *
  * @author Benjamin
  */
-public class VoieDeCirculation {
-    
+public abstract class VoieDeCirculation {
+
+    public abstract boolean ajouterVehicule(Vehicule v);
+
 }
