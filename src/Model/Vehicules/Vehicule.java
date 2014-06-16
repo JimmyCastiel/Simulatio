@@ -58,12 +58,12 @@ public abstract class Vehicule {
     public VoieDeCirculation prochainDeplacement() {
         return this.intineraire.prochainDeplacement();
     }
-    
+
     /**
-     * Methode "Avancer".
-     * Méthode permettant de faire avancer la voiture dans la simulation.
+     * Methode "Avancer". Méthode permettant de faire avancer la voiture dans la
+     * simulation.
      */
     public void Avancer(double valeurSeconde) {
-
+        
     }
 }

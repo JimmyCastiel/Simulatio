@@ -5,6 +5,7 @@
  */
 package Model;
 
+import Model.Signalisations.Feu;
 import Model.Signalisations.Signalisation;
 import Model.Vehicules.Vehicule;
 import java.text.SimpleDateFormat;
@@ -25,14 +26,14 @@ public class Simulateur extends Thread {
 
     private double valeurSeconde;
     private int densiteVoiture;
-    private long vitesse;
+    private long vitesseBoucle;
     private int dureeFeux;
 
-    public Simulateur(List<Signalisation> signalisations, List<Vehicule> voitures, int densiteVoiture, long vitesse, int dureeFeux) {
+    public Simulateur(List<Signalisation> signalisations, List<Vehicule> voitures, int densiteVoiture, long vitesseBoucle, int dureeFeux) {
         this.signalisations = signalisations;
         this.vehicules = voitures;
         this.densiteVoiture = densiteVoiture;
-        this.vitesse = vitesse;
+        this.vitesseBoucle = vitesseBoucle;
         this.dureeFeux = dureeFeux;
     }
 
@@ -54,8 +55,14 @@ public class Simulateur extends Thread {
                 v.Avancer(this.valeurSeconde);
             }
 
+            for (Signalisation s : this.signalisations) {
+                if (s instanceof Feu) {
+                    Feu f = (Feu) s;
+                    f.avancer(this.valeurSeconde);
+                }
+            }
             try {
-                this.sleep(this.vitesse);
+                this.sleep(this.vitesseBoucle);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Simulateur.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -67,5 +74,9 @@ public class Simulateur extends Thread {
         if (v.getVoiePrecedente() == null) {
             v.prochainDeplacement().ajouterVehicule(v);
         }
+    }
+
+    public void ajouterSignalisation(Signalisation s) {
+        this.signalisations.add(s);
     }
 }

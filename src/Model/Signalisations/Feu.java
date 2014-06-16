@@ -2,8 +2,8 @@ package Model.Signalisations;
 
 import java.awt.Color;
 
-public class Feu extends Signalisation{
-    
+public class Feu extends Signalisation {
+
     private int idFeu;
     private int duree;
     private CouleurFeu couleurFeu;
@@ -41,6 +41,8 @@ public class Feu extends Signalisation{
     public void suivant() {
         this.setCouleurFeu(couleurFeu.suivant());
     }
-    
-	
+
+    public void avancer(double valeurSeconde) {
+
+    }
 }
