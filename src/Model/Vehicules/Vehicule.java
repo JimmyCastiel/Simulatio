@@ -63,7 +63,7 @@ public abstract class Vehicule {
      * Methode "Avancer".
      * Méthode permettant de faire avancer la voiture dans la simulation.
      */
-    public void Avancer() {
+    public void Avancer(double valeurSeconde) {
 
     }
 }

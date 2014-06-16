@@ -23,6 +23,7 @@ public class Simulateur extends Thread {
     private List<Signalisation> signalisations;
     private List<Vehicule> vehicules;
 
+    private double valeurSeconde;
     private int densiteVoiture;
     private long vitesse;
     private int dureeFeux;
@@ -50,7 +51,7 @@ public class Simulateur extends Thread {
             System.out.println(dateFormatComp.format(date));
 
             for (Vehicule v : this.vehicules) {
-                v.Avancer();
+                v.Avancer(this.valeurSeconde);
             }
 
             try {
