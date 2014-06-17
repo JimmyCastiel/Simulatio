@@ -21,4 +21,8 @@ public abstract class Intersection {
         this.routes = routes;
         this.nbMinRoutes = nbMinRoutes;
     }
+
+    public void addRoute(Route r) {
+        this.routes.add(r);
+    }
 }

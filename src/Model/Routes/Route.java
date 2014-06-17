@@ -7,7 +7,6 @@ package Model.Routes;
 
 import Model.Intersections.Intersection;
 import Model.Signalisations.Feu;
-import Model.Signalisations.Panneau;
 import Model.Signalisations.PanneauCedezLePassage;
 import Model.Signalisations.PanneauStop;
 import Model.Signalisations.Signalisation;
@@ -26,29 +25,30 @@ public class Route extends VoieDeCirculation {
 
     private Intersection depart;
     private Intersection arrivee;
-    
+
     private String nomRoute;
     private double longueur;
-    
+
     // HashMap de vehicules avec leur distance à parcourir
     private Map<Vehicule, Double> voie;
-    
+
     private List<Signalisation> signalisations;
     private List<ZoneARisque> zonesARisque;
     private List<Station> stations;
-    
+
     private boolean routePleine;
-    
+
     private int nbFeu;
     private int nbCedezLePassage;
     private int nbStop;
-    
+
     private static final double PAS = 2;
     private static final int NOMBRE_MAX_FEUX = 1;
     private static final int NOMBRE_MAX_CEDEZLEPASSAGE = 1;
     private static final int NOMBRE_MAX_STOP = 1;
 
-    public Route(Intersection depart, Intersection arrivee, double longueur, Map<Vehicule, Double> voie, List<Signalisation> signalisations, List<ZoneARisque> zonesARisque, List<Station> stations) {
+    public Route(String nom, Intersection depart, Intersection arrivee, double longueur, Map<Vehicule, Double> voie, List<Signalisation> signalisations, List<ZoneARisque> zonesARisque, List<Station> stations) {
+        this.nomRoute = nom;
         this.depart = depart;
         this.arrivee = arrivee;
         this.longueur = longueur;
@@ -63,12 +63,13 @@ public class Route extends VoieDeCirculation {
     }
 
     public boolean ajouterSignalisation(Signalisation s) {
-        if(s instanceof Feu && this.getNbFeu()<=NOMBRE_MAX_FEUX)
+        if (s instanceof Feu && this.getNbFeu() <= NOMBRE_MAX_FEUX) {
             return signalisations.add(s);
-        else if(s instanceof PanneauCedezLePassage && this.getNbCedezLePassage()<=NOMBRE_MAX_CEDEZLEPASSAGE)
+        } else if (s instanceof PanneauCedezLePassage && this.getNbCedezLePassage() <= NOMBRE_MAX_CEDEZLEPASSAGE) {
             return signalisations.add(s);
-        else if(s instanceof PanneauStop && this.getNbFeu()<=NOMBRE_MAX_FEUX)
+        } else if (s instanceof PanneauStop && this.getNbFeu() <= NOMBRE_MAX_FEUX) {
             return signalisations.add(s);
+        }
         return false;
     }
 
@@ -85,11 +86,11 @@ public class Route extends VoieDeCirculation {
             for (Map.Entry<Vehicule, Double> entry : this.voie.entrySet()) {
                 Vehicule vehicule = entry.getKey();
                 Double double1 = entry.getValue();
-                if(double1 + vehicule.getLongueur() + Route.PAS >= this.longueur){
+                if (double1 + vehicule.getLongueur() + Route.PAS >= this.longueur) {
                     return false;
                 }
             }
-            this.voie.put(v,this.longueur);
+            this.voie.put(v, this.longueur);
             return true;
         }
         return false;
@@ -116,17 +117,19 @@ public class Route extends VoieDeCirculation {
     }
 
     public int getNbFeu() {
-        for(Signalisation s : signalisations){
-            if(s instanceof Feu)
-                nbFeu+=1;
+        for (Signalisation s : signalisations) {
+            if (s instanceof Feu) {
+                nbFeu += 1;
+            }
         }
         return nbFeu;
     }
 
     public int getNbCedezLePassage() {
-        for(Signalisation s : signalisations){
-            if(s instanceof PanneauCedezLePassage)
-                nbFeu+=1;
+        for (Signalisation s : signalisations) {
+            if (s instanceof PanneauCedezLePassage) {
+                nbFeu += 1;
+            }
         }
         return nbCedezLePassage;
     }
@@ -134,7 +137,5 @@ public class Route extends VoieDeCirculation {
     public int getNbStop() {
         return nbStop;
     }
-    
-    
-}
 
+}

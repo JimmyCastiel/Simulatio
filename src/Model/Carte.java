@@ -7,7 +7,6 @@ package Model;
 
 import Model.Intersections.Intersection;
 import Model.Routes.Route;
-import Model.Signalisations.Panneau;
 import Model.Signalisations.Signalisation;
 import Model.ZoneSpecifiques.ZoneARisque;
 import java.util.List;
@@ -57,15 +56,16 @@ public class Carte {
         this.listeZonesARisques = listeZonesARisques;
     }
 
-    public boolean addSignalisationRoute(String nomR, Signalisation s){
+    public boolean addSignalisationRoute(String nomR, Signalisation s) {
         if (mapRouteSignalisation.containsKey(nomR)) {
             int index = 0;
             boolean b = false;
-            for(int i = 0; i < this.listeRoutes.size(); i++) {
-                if(this.listeRoutes.get(i).getNomRoute().equals(nomR))
+            for (int i = 0; i < this.listeRoutes.size(); i++) {
+                if (this.listeRoutes.get(i).getNomRoute().equals(nomR)) {
                     index = i;
+                }
             }
-            if(listeRoutes.get(index).ajouterSignalisation(s)){
+            if (listeRoutes.get(index).ajouterSignalisation(s)) {
                 List<Signalisation> signalisations = mapRouteSignalisation.get(nomR);
                 signalisations.add(s);
                 mapRouteSignalisation.put(nomR, signalisations);
@@ -74,6 +74,5 @@ public class Carte {
         }
         return false;
     }
-    
-    
+
 }

@@ -19,8 +19,8 @@ import java.util.Map;
  */
 public class RueImpasse extends Route {
 
-    public RueImpasse(Intersection depart, Intersection arrivee, double longueur, Map<Vehicule, Double> voie, List<Signalisation> signalisations, List<ZoneARisque> zonesARisque, List<Station> stations) {
-        super(depart, arrivee, longueur, voie, signalisations, zonesARisque, stations);
+    public RueImpasse(String nom, Intersection depart, Intersection arrivee, double longueur, Map<Vehicule, Double> voie, List<Signalisation> signalisations, List<ZoneARisque> zonesARisque, List<Station> stations) {
+        super(nom, depart, arrivee, longueur, voie, signalisations, zonesARisque, stations);
     }
 
 }

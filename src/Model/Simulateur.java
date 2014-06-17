@@ -5,6 +5,7 @@
  */
 package Model;
 
+import Model.Routes.Route;
 import Model.Signalisations.Feu;
 import Model.Signalisations.Signalisation;
 import Model.Vehicules.Vehicule;
@@ -23,13 +24,15 @@ public class Simulateur extends Thread {
 
     private List<Signalisation> signalisations;
     private List<Vehicule> vehicules;
+    private Carte c;
 
     private double valeurSeconde;
     private int densiteVoiture;
     private long vitesseBoucle;
     private int dureeFeux;
 
-    public Simulateur(List<Signalisation> signalisations, List<Vehicule> voitures, int densiteVoiture, long vitesseBoucle, int dureeFeux) {
+    public Simulateur(Carte c, List<Signalisation> signalisations, List<Vehicule> voitures, int densiteVoiture, long vitesseBoucle, int dureeFeux) {
+        this.c = c;
         this.signalisations = signalisations;
         this.vehicules = voitures;
         this.densiteVoiture = densiteVoiture;
@@ -38,7 +41,7 @@ public class Simulateur extends Thread {
     }
 
     public Simulateur() {
-        this(new ArrayList<Signalisation>(), new ArrayList<Vehicule>(), 100, 10, 100);
+        this(new Carte(), new ArrayList<Signalisation>(), new ArrayList<Vehicule>(), 100, 10, 100);
     }
 
     @Override
@@ -61,6 +64,11 @@ public class Simulateur extends Thread {
                     f.avancer(this.valeurSeconde);
                 }
             }
+
+            for (Route r : this.c.getListeRoutes()) {
+                System.out.println(r.getNomRoute());
+            }
+
             try {
                 this.sleep(this.vitesseBoucle);
             } catch (InterruptedException ex) {
@@ -78,5 +86,9 @@ public class Simulateur extends Thread {
 
     public void ajouterSignalisation(Signalisation s) {
         this.signalisations.add(s);
+    }
+
+    public void setCarte(Carte c) {
+        this.c = c;
     }
 }
