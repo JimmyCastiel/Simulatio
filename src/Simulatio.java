@@ -8,6 +8,8 @@ import Model.Simulateur;
 import Model.Vehicules.Vehicule;
 import Model.Vehicules.Voiture;
 import Model.VoieDeCirculation;
+import Model.ZoneSpecifiques.ArretDeBus;
+import Model.ZoneSpecifiques.Station;
 import Model.ZoneSpecifiques.ZoneARisque;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,7 +33,8 @@ public class Simulatio {
 
         Intersection i = new Croisement(new ArrayList<Route>(), 2);
         Intersection i1 = new Croisement(new ArrayList<Route>(), 2);
-        Route r = new Route("route1", i, i1, 200, new HashMap<Vehicule, Double>(), new ArrayList<Signalisation>(), new ArrayList<ZoneARisque>(), new ArrayList<>());
+        Route r = new Route("route1", i, i1, 200, new HashMap<Vehicule, Double>(), new ArrayList<Signalisation>(), new ArrayList<ZoneARisque>(), new ArrayList<Station>());
+        Route r1 = new Route("route2", i1, i, 200, new HashMap<Vehicule, Double>(), new ArrayList<Signalisation>(), new ArrayList<ZoneARisque>(), new ArrayList<Station>());
 
         inter.add(i);
         routes.add(r);
