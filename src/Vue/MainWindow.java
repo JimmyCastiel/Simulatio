@@ -15,19 +15,32 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.SystemColor;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetDropEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JSlider;
 import javax.swing.JSplitPane;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -93,6 +106,10 @@ public class MainWindow extends CircuFrame{
     // SplitPane pour la carte et le panel de gestion 
     private JSplitPane 		verSplitPane;
     
+    //
+    private boolean carteVide = true;
+    private String dernierChemin;
+    
     //Test
     private Feu f;
     private VueFeu vf;
@@ -112,7 +129,7 @@ public class MainWindow extends CircuFrame{
     private MainWindow() {
         initializeContent();
 //        go();
-//        initializeEvents();
+        initializeEvents();
         setVisible(true);
     }
     
@@ -271,6 +288,95 @@ public class MainWindow extends CircuFrame{
         this.verSplitPane.setResizeWeight(0.5);
         this.getContentPane().add(verSplitPane, BorderLayout.CENTER);
         
+        
+    }
+    
+    public void initializeEvents(){
+        importFileEvent();
+        exportToXMLEvent();
+    }
+    
+    public void importFileEvent(){
+        ActionListener importFile = new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                repaint();
+                if(estCarteVide()){
+                    SwingUtilities.invokeLater(new Runnable(){
+                        public void run(){
+                            repaint();
+                            File inFile = null;
+                            JFileChooser fc = new JFileChooser(dernierChemin);
+                            CircuFrame cf = new CircuFrame();
+                            FileFilter filtre = new FileNameExtensionFilter("Fichiers .txt","txt");
+                            fc.setMultiSelectionEnabled(false);
+                            fc.setAcceptAllFileFilterUsed(false);
+                            fc.setFileFilter(filtre);
+                            fc.setDialogTitle("Fichier source pour la carte");
+                            int fboolean = fc.showOpenDialog(cf);
+                            if(fboolean == JFileChooser.APPROVE_OPTION){
+                                inFile = fc.getSelectedFile();
+ //                               this.dernierChemin = fc.getCurrentDirectory().getAbsolutePath();
+                            }
+                        }
+                    });
+                }
+            }
+        };
+        buttonImport.addActionListener(importFile);
+        itemImport.addActionListener(importFile);    
+        
+        // --- Importation drag and drop
+        
+//        this.carteContainer.setDropTarget(new DropTarget(){
+//            public synchronized void drop(DropTargetDropEvent dtde){
+//                if(dtde.isDataFlavorSupported(DataFlavor.javaFileListFlavor)){
+//                    dtde.acceptDrop(DnDConstants.ACTION_COPY_OR_MOVE);
+//                    Transferable t = dtde.getTransferable();
+//                    
+//                }
+//            }
+//            
+//        }
+                
+                
+//                )
+        
+    }
+    
+    public void exportToXMLEvent(){
+        ActionListener export = new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                repaint();
+                SwingUtilities.invokeLater(new Runnable(){
+                    public void run(){
+                        repaint();
+// Creation de la classe qui va gérer l'export XML
+                    }
+                });
+            }
+        };
+        buttonExportToXml.addActionListener(export);
+        itemImportXml.addActionListener(export);
+    }
+    
+    
+    public boolean estCarteVide(){
+        if(carteVide){
+            return true;
+        }
+        else if(JOptionPane.showConfirmDialog(null,
+                                              "Vider la carte",
+                                              "Toutes les doonées de la carte seront supprimées. Les données non sauvegardées seront perdues.Voulez-vous continuer?",
+                                              JOptionPane.YES_NO_OPTION,
+                                              JOptionPane.WARNING_MESSAGE)
+                 == JOptionPane.OK_OPTION){
+            effacerCarte();
+            return true;
+        }
+        return false;                                    
+    }
+    
+    public void effacerCarte(){
         
     }
     

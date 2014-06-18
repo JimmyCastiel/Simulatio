@@ -8,6 +8,6 @@ package Vue.Vehicules;
  *
  * @author 8460P
  */
-public class VueVoiture {
+public class VueVoiture{
     
 }
