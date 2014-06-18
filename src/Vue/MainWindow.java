@@ -357,7 +357,6 @@ public class MainWindow extends CircuFrame{
         };
         buttonExportToXml.addActionListener(export);
         itemImportXml.addActionListener(export);
-        
     }
     
     
