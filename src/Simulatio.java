@@ -51,24 +51,26 @@ public class Simulatio {
         inter.add(i);
         inter.add(i1);
         inter.add(i2);
+        inter.add(i3);
         routes.add(r);
         routes.add(r1);
         routes.add(r2);
         routes.add(r3);
+        routes.add(r4);
 
         c.setListeRoutes(routes);
         c.setListeDesIntersections(inter);
 
-        Itineraire it;
-        try {
-            it = Itineraire.getItineraire(c, r, r3);
-            System.out.println(it.getParcours());
-        } catch (Exception ex) {
-            Logger.getLogger(Simulatio.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        /*Simulateur s = new Simulateur();
-         s.setCarte(c);
-         s.start();*/
+        /*Itineraire it;
+         try {
+         it = Itineraire.getItineraire(c, r, r3);
+         System.out.println(it.getParcours());
+         } catch (Exception ex) {
+         Logger.getLogger(Simulatio.class.getName()).log(Level.SEVERE, null, ex);
+         }*/
+        Simulateur s = new Simulateur();
+        s.setCarte(c);
+        s.start();
     }
 
 }

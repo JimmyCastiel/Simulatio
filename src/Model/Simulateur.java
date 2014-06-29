@@ -9,6 +9,7 @@ import Model.Routes.Route;
 import Model.Signalisations.Feu;
 import Model.Signalisations.Signalisation;
 import Model.Vehicules.Vehicule;
+import Model.Vehicules.Voiture;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,7 +42,7 @@ public class Simulateur extends Thread {
     }
 
     public Simulateur() {
-        this(new Carte(), new ArrayList<Signalisation>(), new ArrayList<Vehicule>(), 100, 10, 100);
+        this(new Carte(), new ArrayList<Signalisation>(), new ArrayList<Vehicule>(), 10, 10, 100);
     }
 
     @Override
@@ -54,6 +55,13 @@ public class Simulateur extends Thread {
             dateFormatComp = new SimpleDateFormat("dd MMM yyyy hh:mm:ss a");
             System.out.println(dateFormatComp.format(date));
 
+            for (int i = this.vehicules.size(); i < densiteVoiture; i++) {
+                try {
+                    this.vehicules.add(new Voiture(Itineraire.getItineraire(c, c.getListeRoutes().get((int)(Math.random() * c.getListeRoutes().size())), c.getListeRoutes().get((int)(Math.random() * c.getListeRoutes().size()))), 2, 50, 150));
+                } catch (Exception ex) {
+                    //Logger.getLogger(Simulateur.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
             for (Vehicule v : this.vehicules) {
                 v.Avancer(this.valeurSeconde);
             }
@@ -66,7 +74,7 @@ public class Simulateur extends Thread {
             }
 
             for (Route r : this.c.getListeRoutes()) {
-                System.out.println(r.getNomRoute());
+                //System.out.println(r.getNomRoute());
             }
 
             try {

@@ -64,6 +64,5 @@ public abstract class Vehicule {
      * simulation.
      */
     public void Avancer(double valeurSeconde) {
-        
     }
 }
