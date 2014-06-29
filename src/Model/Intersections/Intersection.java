@@ -6,13 +6,16 @@
 package Model.Intersections;
 
 import Model.Routes.Route;
+import Model.Vehicules.Vehicule;
+import Model.VoieDeCirculation;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
  * @author Benjamin
  */
-public abstract class Intersection {
+public abstract class Intersection extends VoieDeCirculation {
 
     private List<Route> routes;
     private int nbMinRoutes;
@@ -25,4 +28,36 @@ public abstract class Intersection {
     public void addRoute(Route r) {
         this.routes.add(r);
     }
+
+    public List<Route> getRoutes() {
+        return routes;
+    }
+
+    @Override
+    public boolean ajouterVehicule(Vehicule v) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 17 * hash + Objects.hashCode(this.routes);
+        hash = 17 * hash + this.nbMinRoutes;
+        return hash;
+    }
+
+    public boolean equals(Intersection i) {
+        if (i == null) {
+            return false;
+        }
+        final Intersection other = (Intersection) i;
+        if (!Objects.equals(this.routes, other.routes)) {
+            return false;
+        }
+        if (this.nbMinRoutes != other.nbMinRoutes) {
+            return false;
+        }
+        return true;
+    }
+
 }

@@ -1,18 +1,18 @@
 package Model.Vehicules;
 
-import Model.Intineraire;
+import Model.Itineraire;
 import Model.VoieDeCirculation;
 import java.io.Serializable;
 
 public abstract class Vehicule {
 
-    private Intineraire intineraire;
+    private Itineraire intineraire;
 
     private double longueur;
     private double vitesse;
     private double vitesseMax;
 
-    public Vehicule(Intineraire intineraire, double longueur, double vitesse, double vitesseMax) {
+    public Vehicule(Itineraire intineraire, double longueur, double vitesse, double vitesseMax) {
         this.intineraire = intineraire;
         this.longueur = longueur;
         this.vitesse = vitesse;
@@ -43,11 +43,11 @@ public abstract class Vehicule {
         this.vitesseMax = vitesseMax;
     }
 
-    public void setIntineraire(Intineraire intineraire) {
+    public void setIntineraire(Itineraire intineraire) {
         this.intineraire = intineraire;
     }
 
-    public Intineraire getIntineraire() {
+    public Itineraire getIntineraire() {
         return intineraire;
     }
 

@@ -138,4 +138,16 @@ public class Route extends VoieDeCirculation {
         return nbStop;
     }
 
+    public Intersection getDepart() {
+        return depart;
+    }
+
+    public Intersection getArrivee() {
+        return arrivee;
+    }
+
+    @Override
+    public String toString() {
+        return "Route{" + "nomRoute=" + nomRoute + ", longueur=" + longueur + ", routePleine=" + routePleine + ", nbFeu=" + nbFeu + ", nbCedezLePassage=" + nbCedezLePassage + ", nbStop=" + nbStop + '}';
+    }
 }
