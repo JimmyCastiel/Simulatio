@@ -7,6 +7,7 @@ package Model;
 
 import Model.Intersections.Intersection;
 import Model.Routes.Route;
+import Model.Routes.RueImpasse;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
@@ -97,23 +98,25 @@ public class Itineraire {
 
     private static List<VoieDeCirculation> parcoursGraphe(Intersection intersectionPrecendente, Intersection depart, Intersection arrivee) {
         List<VoieDeCirculation> parcours = new ArrayList<VoieDeCirculation>();
-        List<VoieDeCirculation> tmp = null;
         parcours.add(depart);
         for (Route r : depart.getRoutes()) {
-            if (r.getArrivee().equals(arrivee)) {
-                parcours.add(r);
-                return (parcours);
-            } else if (intersectionPrecendente == null) {
-                parcours.add(r);
-                tmp = parcoursGraphe(depart, r.getArrivee(), arrivee);
-            } else if (!intersectionPrecendente.equals(r.getArrivee())) {
-                parcours.add(r);
-                tmp = parcoursGraphe(depart, r.getArrivee(), arrivee);
-            }
-            if (tmp != null) {
-                parcours.addAll(tmp);
-                parcours.add(arrivee);
-                return (parcours);
+            List<VoieDeCirculation> tmp = null;
+            if (!(r instanceof RueImpasse)) {
+                if (r.getArrivee().equals(arrivee)) {
+                    parcours.add(r);
+                    return (parcours);
+                } else if (intersectionPrecendente == null) {
+                    parcours.add(r);
+                    tmp = parcoursGraphe(depart, r.getArrivee(), arrivee);
+                } else if (!intersectionPrecendente.equals(r.getArrivee())) {
+                    parcours.add(r);
+                    tmp = parcoursGraphe(depart, r.getArrivee(), arrivee);
+                }
+                if (tmp != null) {
+                    parcours.addAll(tmp);
+                    parcours.add(arrivee);
+                    return (parcours);
+                }
             }
         }
 
