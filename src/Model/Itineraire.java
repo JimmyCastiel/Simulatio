@@ -84,7 +84,7 @@ public class Itineraire {
 
     private static List<VoieDeCirculation> calculerItineraire(Route depart, Route arrivee) {
         List<VoieDeCirculation> chemin = new ArrayList<VoieDeCirculation>();
-        List<VoieDeCirculation> tmp = parcoursGraphe(null, depart.getArrivee(), arrivee.getArrivee());
+        List<VoieDeCirculation> tmp = parcoursGraphe(null, depart.getArrivee(), arrivee.getDepart());
 
         if (tmp == null) {
             return null;
@@ -101,23 +101,24 @@ public class Itineraire {
         parcours.add(depart);
         for (Route r : depart.getRoutes()) {
             List<VoieDeCirculation> tmp = null;
-            if (!(r instanceof RueImpasse)) {
-                if (r.getArrivee().equals(arrivee)) {
-                    parcours.add(r);
-                    return (parcours);
-                } else if (intersectionPrecendente == null) {
-                    parcours.add(r);
-                    tmp = parcoursGraphe(depart, r.getArrivee(), arrivee);
-                } else if (!intersectionPrecendente.equals(r.getArrivee())) {
-                    parcours.add(r);
+            //if (!(r instanceof RueImpasse)) {
+            if (r.getArrivee().equals(arrivee)) {
+                parcours.add(r);
+                parcours.add(r.getArrivee());
+                return (parcours);
+            } else if (intersectionPrecendente != null) {
+                if (!intersectionPrecendente.equals(r.getArrivee())) {
                     tmp = parcoursGraphe(depart, r.getArrivee(), arrivee);
                 }
-                if (tmp != null) {
-                    parcours.addAll(tmp);
-                    parcours.add(arrivee);
-                    return (parcours);
-                }
+            } else if (intersectionPrecendente == null) {
+                tmp = parcoursGraphe(depart, r.getArrivee(), arrivee);
             }
+            if (tmp != null) {
+                parcours.add(r);
+                parcours.addAll(tmp);
+                return (parcours);
+            }
+            //}
         }
 
         return null;

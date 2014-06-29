@@ -38,10 +38,12 @@ public class Simulatio {
         Intersection i = new Croisement(new ArrayList<Route>(), 2);
         Intersection i1 = new Croisement(new ArrayList<Route>(), 2);
         Intersection i2 = new Croisement(new ArrayList<Route>(), 2);
+        Intersection i3 = new Croisement(new ArrayList<Route>(), 2);
         Route r = new Route("route1", i, i1, 200, new HashMap<Vehicule, Double>(), new ArrayList<Signalisation>(), new ArrayList<ZoneARisque>(), new ArrayList<Station>());
-        Route r1 = new Route("route2", i1, i, 200, new HashMap<Vehicule, Double>(), new ArrayList<Signalisation>(), new ArrayList<ZoneARisque>(), new ArrayList<Station>());
-        Route r2 = new Route("route3", i1, i2, 200, new HashMap<Vehicule, Double>(), new ArrayList<Signalisation>(), new ArrayList<ZoneARisque>(), new ArrayList<Station>());
-        Route r3 = new RueImpasse("route4", i2, i1, 200, new HashMap<Vehicule, Double>(), new ArrayList<Signalisation>(), new ArrayList<ZoneARisque>(), new ArrayList<Station>());
+        Route r1 = new Route("route1[INV]", i1, i, 200, new HashMap<Vehicule, Double>(), new ArrayList<Signalisation>(), new ArrayList<ZoneARisque>(), new ArrayList<Station>());
+        Route r2 = new Route("route2", i1, i2, 200, new HashMap<Vehicule, Double>(), new ArrayList<Signalisation>(), new ArrayList<ZoneARisque>(), new ArrayList<Station>());
+        Route r3 = new RueImpasse("route2[INV]", i2, i1, 200, new HashMap<Vehicule, Double>(), new ArrayList<Signalisation>(), new ArrayList<ZoneARisque>(), new ArrayList<Station>());
+        Route r4 = new RueImpasse("route3", i2, i3, 200, new HashMap<Vehicule, Double>(), new ArrayList<Signalisation>(), new ArrayList<ZoneARisque>(), new ArrayList<Station>());
         /*i.addRoute(r);
          i1.addRoute(r1);
          i1.addRoute(r2);*/
