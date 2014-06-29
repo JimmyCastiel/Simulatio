@@ -5,6 +5,7 @@
  */
 package Model;
 
+import Model.Intersections.Intersection;
 import Model.Routes.Route;
 import Model.Signalisations.Feu;
 import Model.Signalisations.Signalisation;
@@ -60,13 +61,23 @@ public class Simulateur extends Thread {
             for (int i = this.vehicules.size(); i < densiteVoiture; i++) {
                 try {
                     this.vehicules.add(new Voiture(Itineraire.getItineraire(c, c.getListeRoutes().get((int) (Math.random() * c.getListeRoutes().size())), c.getListeRoutes().get((int) (Math.random() * c.getListeRoutes().size()))), 2, 10, 150));
+                    this.vehicules.get(i).prochainDeplacement();
+                    this.vehicules.get(i).getVoiePrecedente().ajouterVehicule(this.vehicules.get(i));
                 } catch (Exception ex) {
                     i = i--;
                     //Logger.getLogger(Simulateur.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             for (Vehicule v : this.vehicules) {
-                System.out.println(v.Avancer(this.valeurSeconde));
+                if (!(v.getVoiePrecedente() instanceof Intersection)) {
+                    Route r = (Route) v.getVoiePrecedente();
+                    r.avancer(v, v.Avancer(this.valeurSeconde));
+                } else {
+                    while (v.prochainDeplacement() instanceof Intersection) {
+                    }
+                    Route r = (Route) v.getVoiePrecedente();
+                    r.avancer(v, v.Avancer(this.valeurSeconde));
+                }
             }
 
             for (Signalisation s : this.signalisations) {

@@ -14,5 +14,6 @@ import Model.Vehicules.Vehicule;
 public abstract class VoieDeCirculation {
 
     public abstract boolean ajouterVehicule(Vehicule v);
+    public abstract boolean supprimerVehicule(Vehicule v);
 
 }

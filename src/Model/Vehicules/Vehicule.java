@@ -1,6 +1,7 @@
 package Model.Vehicules;
 
 import Model.Itineraire;
+import Model.Routes.Route;
 import Model.VoieDeCirculation;
 import java.io.Serializable;
 import java.util.Date;
@@ -60,6 +61,10 @@ public abstract class Vehicule {
     }
 
     public VoieDeCirculation prochainDeplacement() {
+        if (this.intineraire.getVoiePrecedente() != null) {
+            this.intineraire.getVoiePrecedente().supprimerVehicule(this);
+        }
+        this.intineraire.prochainDeplacement().ajouterVehicule(this);
         return this.intineraire.prochainDeplacement();
     }
 

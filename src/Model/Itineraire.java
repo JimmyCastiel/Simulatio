@@ -55,7 +55,7 @@ public class Itineraire {
     public VoieDeCirculation getVoiePrecedente() {
         VoieDeCirculation voie = null;
 
-        if (!this.parcours.isEmpty()) {
+        if (!this.voiesPrecedentes.isEmpty()) {
             voie = this.voiesPrecedentes.get(this.voiesPrecedentes.size() - 1);
         }
 

@@ -97,6 +97,11 @@ public class Route extends VoieDeCirculation {
         return false;
     }
 
+    public boolean supprimerVehicule(Vehicule v) {
+        this.voie.remove(v);
+        return true;
+    }
+
     public void setLongueur(double longueur) {
         this.longueur = longueur;
     }
@@ -150,5 +155,10 @@ public class Route extends VoieDeCirculation {
     @Override
     public String toString() {
         return "Route{" + "nomRoute=" + nomRoute + ", longueur=" + longueur + ", routePleine=" + routePleine + ", nbFeu=" + nbFeu + ", nbCedezLePassage=" + nbCedezLePassage + ", nbStop=" + nbStop + '}';
+    }
+
+    public void avancer(Vehicule v, double distanceParcourue) {
+        double distance = this.voie.get(v);
+        this.voie.put(v, distance - distanceParcourue);
     }
 }
