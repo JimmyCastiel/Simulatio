@@ -2,7 +2,9 @@
 import Model.Carte;
 import Model.Intersections.Croisement;
 import Model.Intersections.Intersection;
+import Model.Itineraire;
 import Model.Routes.Route;
+import Model.Routes.RueImpasse;
 import Model.Signalisations.Signalisation;
 import Model.Simulateur;
 import Model.Vehicules.Vehicule;
@@ -14,6 +16,8 @@ import Model.ZoneSpecifiques.ZoneARisque;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -37,23 +41,32 @@ public class Simulatio {
         Route r = new Route("route1", i, i1, 200, new HashMap<Vehicule, Double>(), new ArrayList<Signalisation>(), new ArrayList<ZoneARisque>(), new ArrayList<Station>());
         Route r1 = new Route("route2", i1, i, 200, new HashMap<Vehicule, Double>(), new ArrayList<Signalisation>(), new ArrayList<ZoneARisque>(), new ArrayList<Station>());
         Route r2 = new Route("route3", i1, i2, 200, new HashMap<Vehicule, Double>(), new ArrayList<Signalisation>(), new ArrayList<ZoneARisque>(), new ArrayList<Station>());
-        i.addRoute(r);
-        i1.addRoute(r1);
-        i1.addRoute(r2);
+        Route r3 = new RueImpasse("route4", i2, i1, 200, new HashMap<Vehicule, Double>(), new ArrayList<Signalisation>(), new ArrayList<ZoneARisque>(), new ArrayList<Station>());
+        /*i.addRoute(r);
+         i1.addRoute(r1);
+         i1.addRoute(r2);*/
 
         inter.add(i);
         inter.add(i1);
+        inter.add(i2);
         routes.add(r);
         routes.add(r1);
+        routes.add(r2);
+        routes.add(r3);
 
         c.setListeRoutes(routes);
         c.setListeDesIntersections(inter);
 
-
+        Itineraire it;
+        try {
+            it = Itineraire.getItineraire(c, r, r3);
+            System.out.println(it.getParcours());
+        } catch (Exception ex) {
+            Logger.getLogger(Simulatio.class.getName()).log(Level.SEVERE, null, ex);
+        }
         /*Simulateur s = new Simulateur();
          s.setCarte(c);
          s.start();*/
     }
-
 
 }

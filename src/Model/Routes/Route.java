@@ -56,6 +56,7 @@ public class Route extends VoieDeCirculation {
         this.signalisations = signalisations;
         this.zonesARisque = zonesARisque;
         this.stations = stations;
+        this.depart.addRoute(this);
     }
 
     public Route() {

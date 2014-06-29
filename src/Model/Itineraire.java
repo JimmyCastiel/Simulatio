@@ -65,25 +65,37 @@ public class Itineraire {
         this.parcours = parcours;
     }
 
-    public Itineraire getItineraire(Carte c, Route depart, Route arrivee) throws Exception {
+    public List<VoieDeCirculation> getParcours() {
+        return parcours;
+    }
+
+    public static Itineraire getItineraire(Carte c, Route depart, Route arrivee) throws Exception {
         Itineraire i = new Itineraire(c, depart, arrivee);
         List<VoieDeCirculation> l;
         l = calculerItineraire(depart, arrivee);
         if (l != null) {
-            i.setParcours(parcours);
+            i.setParcours(l);
         } else {
             throw new Exception("Probleme lors de la génération de l'itinéraire !");
         }
         return i;
     }
 
-    private List<VoieDeCirculation> calculerItineraire(Route depart, Route arrivee) {
+    private static List<VoieDeCirculation> calculerItineraire(Route depart, Route arrivee) {
         List<VoieDeCirculation> chemin = new ArrayList<VoieDeCirculation>();
-        chemin.addAll(parcoursGraphe(null, depart.getArrivee(), arrivee.getArrivee()));
+        List<VoieDeCirculation> tmp = parcoursGraphe(null, depart.getArrivee(), arrivee.getArrivee());
+
+        if (tmp == null) {
+            return null;
+        }
+
+        chemin.add(depart);
+        chemin.addAll(tmp);
+        chemin.add(arrivee);
         return chemin;
     }
 
-    private List<VoieDeCirculation> parcoursGraphe(Intersection precendent, Intersection depart, Intersection arrivee) {
+    private static List<VoieDeCirculation> parcoursGraphe(Intersection intersectionPrecendente, Intersection depart, Intersection arrivee) {
         List<VoieDeCirculation> parcours = new ArrayList<VoieDeCirculation>();
         List<VoieDeCirculation> tmp = null;
         parcours.add(depart);
@@ -91,10 +103,10 @@ public class Itineraire {
             if (r.getArrivee().equals(arrivee)) {
                 parcours.add(r);
                 return (parcours);
-            } else if (precendent == null) {
+            } else if (intersectionPrecendente == null) {
                 parcours.add(r);
                 tmp = parcoursGraphe(depart, r.getArrivee(), arrivee);
-            } else if (!precendent.equals(r.getArrivee())) {
+            } else if (!intersectionPrecendente.equals(r.getArrivee())) {
                 parcours.add(r);
                 tmp = parcoursGraphe(depart, r.getArrivee(), arrivee);
             }
