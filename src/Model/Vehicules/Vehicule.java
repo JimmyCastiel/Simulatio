@@ -3,6 +3,7 @@ package Model.Vehicules;
 import Model.Itineraire;
 import Model.VoieDeCirculation;
 import java.io.Serializable;
+import java.util.Date;
 
 public abstract class Vehicule {
 
@@ -12,11 +13,14 @@ public abstract class Vehicule {
     private double vitesse;
     private double vitesseMax;
 
+    private Date dateDAppelPrecedente;
+
     public Vehicule(Itineraire intineraire, double longueur, double vitesse, double vitesseMax) {
         this.intineraire = intineraire;
         this.longueur = longueur;
         this.vitesse = vitesse;
         this.vitesseMax = vitesseMax;
+        this.dateDAppelPrecedente = new Date();
     }
 
     public double getLongueur() {
@@ -63,6 +67,13 @@ public abstract class Vehicule {
      * Methode "Avancer". Méthode permettant de faire avancer la voiture dans la
      * simulation.
      */
-    public void Avancer(double valeurSeconde) {
+    public double Avancer(double valeurSeconde) {
+        double distanceparcourue;
+        Date date = new Date();
+
+        distanceparcourue = (this.vitesse / 1000) * ((date.getTime() - this.dateDAppelPrecedente.getTime()) * valeurSeconde);
+        this.dateDAppelPrecedente = date;
+
+        return distanceparcourue;
     }
 }

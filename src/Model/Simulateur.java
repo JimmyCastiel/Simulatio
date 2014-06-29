@@ -32,38 +32,41 @@ public class Simulateur extends Thread {
     private long vitesseBoucle;
     private int dureeFeux;
 
-    public Simulateur(Carte c, List<Signalisation> signalisations, List<Vehicule> voitures, int densiteVoiture, long vitesseBoucle, int dureeFeux) {
+    public Simulateur(Carte c, List<Signalisation> signalisations, List<Vehicule> voitures, double valeurSeconde, int densiteVoiture, long vitesseBoucle, int dureeFeux) {
         this.c = c;
         this.signalisations = signalisations;
         this.vehicules = voitures;
+        this.valeurSeconde = valeurSeconde;
         this.densiteVoiture = densiteVoiture;
         this.vitesseBoucle = vitesseBoucle;
         this.dureeFeux = dureeFeux;
     }
 
     public Simulateur() {
-        this(new Carte(), new ArrayList<Signalisation>(), new ArrayList<Vehicule>(), 10, 10, 100);
+        this(new Carte(), new ArrayList<Signalisation>(), new ArrayList<Vehicule>(), 1.2, 10, 10, 100);
     }
 
     @Override
     public synchronized void start() {
         super.start(); //To change body of generated methods, choose Tools | Templates.
         while (true) {
-            Date date = new Date();
-            SimpleDateFormat dateFormatComp;
+            /*Date date = new Date();
+             SimpleDateFormat dateFormatComp;
 
-            dateFormatComp = new SimpleDateFormat("dd MMM yyyy hh:mm:ss a");
-            System.out.println(dateFormatComp.format(date));
+             dateFormatComp = new SimpleDateFormat("dd MMM yyyy hh:mm:ss a");
+             System.out.println(dateFormatComp.format(date));
+             System.out.println(date.getTime());*/
 
             for (int i = this.vehicules.size(); i < densiteVoiture; i++) {
                 try {
-                    this.vehicules.add(new Voiture(Itineraire.getItineraire(c, c.getListeRoutes().get((int)(Math.random() * c.getListeRoutes().size())), c.getListeRoutes().get((int)(Math.random() * c.getListeRoutes().size()))), 2, 50, 150));
+                    this.vehicules.add(new Voiture(Itineraire.getItineraire(c, c.getListeRoutes().get((int) (Math.random() * c.getListeRoutes().size())), c.getListeRoutes().get((int) (Math.random() * c.getListeRoutes().size()))), 2, 10, 150));
                 } catch (Exception ex) {
+                    i = i--;
                     //Logger.getLogger(Simulateur.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             for (Vehicule v : this.vehicules) {
-                v.Avancer(this.valeurSeconde);
+                System.out.println(v.Avancer(this.valeurSeconde));
             }
 
             for (Signalisation s : this.signalisations) {
