@@ -61,23 +61,25 @@ public class Simulateur extends Thread {
             for (int i = this.vehicules.size(); i < densiteVoiture; i++) {
                 try {
                     this.vehicules.add(new Voiture(Itineraire.getItineraire(c, c.getListeRoutes().get((int) (Math.random() * c.getListeRoutes().size())), c.getListeRoutes().get((int) (Math.random() * c.getListeRoutes().size()))), 2, 10, 150));
-                    this.vehicules.get(i).prochainDeplacement();
-                    this.vehicules.get(i).getVoiePrecedente().ajouterVehicule(this.vehicules.get(i));
+                    //this.vehicules.get(i).getVoiePrecedente().ajouterVehicule(this.vehicules.get(i));
                 } catch (Exception ex) {
-                    i = i--;
+                    //i = i--;
                     //Logger.getLogger(Simulateur.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println(ex.getMessage());
                 }
             }
+
             for (Vehicule v : this.vehicules) {
-                if (!(v.getVoiePrecedente() instanceof Intersection)) {
-                    Route r = (Route) v.getVoiePrecedente();
-                    r.avancer(v, v.Avancer(this.valeurSeconde));
-                } else {
-                    while (v.prochainDeplacement() instanceof Intersection) {
-                    }
-                    Route r = (Route) v.getVoiePrecedente();
-                    r.avancer(v, v.Avancer(this.valeurSeconde));
-                }
+                //if (!(v.getVoiePrecedente() instanceof Intersection)) {
+                Route r = (Route) v.getVoiePrecedente();
+                double distanceParcourue = v.Avancer(this.valeurSeconde);
+                r.avancer(v, distanceParcourue);
+                /*} else {
+                 while (v.prochainDeplacement() instanceof Intersection) {
+                 }
+                 Route r = (Route) v.getVoiePrecedente();
+                 r.avancer(v, v.Avancer(this.valeurSeconde));
+                 }*/
             }
 
             for (Signalisation s : this.signalisations) {

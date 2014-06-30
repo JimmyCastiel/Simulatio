@@ -16,12 +16,16 @@ public abstract class Vehicule {
 
     private Date dateDAppelPrecedente;
 
-    public Vehicule(Itineraire intineraire, double longueur, double vitesse, double vitesseMax) {
+    public Vehicule(Itineraire intineraire, double longueur, double vitesse, double vitesseMax) throws Exception {
         this.intineraire = intineraire;
         this.longueur = longueur;
         this.vitesse = vitesse;
         this.vitesseMax = vitesseMax;
         this.dateDAppelPrecedente = new Date();
+
+        if (!this.intineraire.prochainDeplacement().ajouterVehicule(this)) {
+            throw new Exception("N'a pas pu s'ajouter à la route !");
+        }
     }
 
     public double getLongueur() {
@@ -65,7 +69,7 @@ public abstract class Vehicule {
             this.intineraire.getVoiePrecedente().supprimerVehicule(this);
         }
         this.intineraire.prochainDeplacement().ajouterVehicule(this);
-        return this.intineraire.prochainDeplacement();
+        return this.intineraire.getVoiePrecedente();
     }
 
     /**
@@ -73,12 +77,15 @@ public abstract class Vehicule {
      * simulation.
      */
     public double Avancer(double valeurSeconde) {
-        double distanceparcourue;
+        double distanceParcourue;
         Date date = new Date();
 
-        distanceparcourue = (this.vitesse / 1000) * ((date.getTime() - this.dateDAppelPrecedente.getTime()) * valeurSeconde);
+        distanceParcourue = (this.vitesse / 1000) * (((date.getTime() - this.dateDAppelPrecedente.getTime()) * valeurSeconde) / 1000);
         this.dateDAppelPrecedente = date;
 
-        return distanceparcourue;
+        if (this.getVoiePrecedente() == null) {
+            System.out.println("Arrivé");
+        }
+        return distanceParcourue;
     }
 }

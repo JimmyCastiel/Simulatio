@@ -158,7 +158,15 @@ public class Route extends VoieDeCirculation {
     }
 
     public void avancer(Vehicule v, double distanceParcourue) {
-        double distance = this.voie.get(v);
-        this.voie.put(v, distance - distanceParcourue);
+        if (this.voie.containsKey(v)) {
+            double distance = this.voie.get(v);
+            double distanceRestante = distance - distanceParcourue;
+            if (distanceRestante <= 0) {
+                this.supprimerVehicule(v);
+                v.prochainDeplacement().ajouterVehicule(v);
+            } else {
+                this.voie.put(v, distanceRestante);
+            }
+        }
     }
 }
