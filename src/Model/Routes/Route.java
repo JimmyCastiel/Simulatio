@@ -163,9 +163,13 @@ public class Route extends VoieDeCirculation {
             double distanceRestante = distance - distanceParcourue;
             if (distanceRestante <= 0) {
                 this.supprimerVehicule(v);
-                v.prochainDeplacement().ajouterVehicule(v);
+                VoieDeCirculation vdc = v.prochainDeplacement();
+                if (vdc != null) {
+                    vdc.ajouterVehicule(v);
+                }
             } else {
                 this.voie.put(v, distanceRestante);
+                //System.out.println(this.voie.get(v));
             }
         }
     }

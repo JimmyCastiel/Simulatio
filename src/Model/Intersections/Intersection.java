@@ -36,7 +36,11 @@ public abstract class Intersection extends VoieDeCirculation {
     @Override
     public boolean ajouterVehicule(Vehicule v) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        return v.prochainDeplacement().ajouterVehicule(v);
+        v.prochainDeplacement();
+        if (v.getVoiePrecedente() != null) {
+            return v.getVoiePrecedente().ajouterVehicule(v);
+        }
+        return false;
     }
 
     @Override

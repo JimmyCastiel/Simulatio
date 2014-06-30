@@ -44,11 +44,12 @@ public class Simulateur extends Thread {
     }
 
     public Simulateur() {
-        this(new Carte(), new ArrayList<Signalisation>(), new ArrayList<Vehicule>(), 1.2, 10, 10, 100);
+        this(new Carte(), new ArrayList<Signalisation>(), new ArrayList<Vehicule>(), 10000, 10, 10, 100);
     }
 
     @Override
     public synchronized void start() {
+        List<Vehicule> vehiculesASupprimer = new ArrayList<Vehicule>();
         super.start(); //To change body of generated methods, choose Tools | Templates.
         while (true) {
             /*Date date = new Date();
@@ -60,10 +61,9 @@ public class Simulateur extends Thread {
 
             for (int i = this.vehicules.size(); i < densiteVoiture; i++) {
                 try {
-                    this.vehicules.add(new Voiture(Itineraire.getItineraire(c, c.getListeRoutes().get((int) (Math.random() * c.getListeRoutes().size())), c.getListeRoutes().get((int) (Math.random() * c.getListeRoutes().size()))), 2, 10, 150));
-                    //this.vehicules.get(i).getVoiePrecedente().ajouterVehicule(this.vehicules.get(i));
+                    this.vehicules.add(new Voiture(Itineraire.getItineraire(c, c.getListeRoutes().get((int) (Math.random() * c.getListeRoutes().size())), c.getListeRoutes().get((int) (Math.random() * c.getListeRoutes().size()))), 2, 50, 150));
+                    System.out.println("Réussi !");
                 } catch (Exception ex) {
-                    //i = i--;
                     //Logger.getLogger(Simulateur.class.getName()).log(Level.SEVERE, null, ex);
                     System.out.println(ex.getMessage());
                 }
@@ -72,8 +72,13 @@ public class Simulateur extends Thread {
             for (Vehicule v : this.vehicules) {
                 //if (!(v.getVoiePrecedente() instanceof Intersection)) {
                 Route r = (Route) v.getVoiePrecedente();
-                double distanceParcourue = v.Avancer(this.valeurSeconde);
-                r.avancer(v, distanceParcourue);
+                if (r != null) {
+                    double distanceParcourue = v.Avancer(this.valeurSeconde);
+                    r.avancer(v, distanceParcourue);
+                } else {
+                    vehiculesASupprimer.add(v);
+                    System.out.println("Ajout d'un véhicule à supprimer");
+                }
                 /*} else {
                  while (v.prochainDeplacement() instanceof Intersection) {
                  }
@@ -81,6 +86,13 @@ public class Simulateur extends Thread {
                  r.avancer(v, v.Avancer(this.valeurSeconde));
                  }*/
             }
+
+            for (Vehicule vehicule : vehiculesASupprimer) {
+                this.vehicules.remove(vehicule);
+                System.out.println("Vehicule supprimé " + vehicule.toString());
+            }
+
+            vehiculesASupprimer.clear();
 
             for (Signalisation s : this.signalisations) {
                 if (s instanceof Feu) {

@@ -68,7 +68,10 @@ public abstract class Vehicule {
         if (this.intineraire.getVoiePrecedente() != null) {
             this.intineraire.getVoiePrecedente().supprimerVehicule(this);
         }
-        this.intineraire.prochainDeplacement().ajouterVehicule(this);
+        this.intineraire.prochainDeplacement();
+        if (this.intineraire.getVoiePrecedente() != null) {
+            this.intineraire.getVoiePrecedente().ajouterVehicule(this);
+        }
         return this.intineraire.getVoiePrecedente();
     }
 
