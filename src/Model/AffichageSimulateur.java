@@ -31,14 +31,13 @@ public class AffichageSimulateur {
 
     public void start(String type) {
         for (String string : this.messages) {
-            if (type.contains("*")) {
+            if (type.contains("[*]")) {
                 System.out.println(string);
             } else {
                 if (string.contains(type)) {
                     System.out.println(string);
                 }
             }
-
         }
         this.messages.clear();
     }
