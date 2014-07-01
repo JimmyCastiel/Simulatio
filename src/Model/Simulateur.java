@@ -65,11 +65,11 @@ public class Simulateur extends Thread {
                     route1 = (int) (Math.random() * (c.getListeRoutes().size() - 1));
                     route2 = (int) (Math.random() * (c.getListeRoutes().size() - 1));
                     //this.vehicules.add(new Voiture(Itineraire.getItineraire(c, c.getListeRoutes().get((int) (Math.random() * c.getListeRoutes().size())), c.getListeRoutes().get((int) (Math.random() * c.getListeRoutes().size()))), 2, 50, 150));
-                    this.vehicules.add(new Voiture(Itineraire.getItineraire(c, c.getListeRoutes().get(route1), c.getListeRoutes().get(route2)), 2, (int) (Math.random() * 50) + 1, (int) (Math.random() * 150)+51));
-                    System.out.println("[+] Création de voiture réussie : " + this.vehicules.get(this.vehicules.size()) + ", vitesse : " + this.vehicules.get(this.vehicules.size()).getVitesse());
+                    this.vehicules.add(new Voiture(Itineraire.getItineraire(c, c.getListeRoutes().get(route1), c.getListeRoutes().get(route2)), 2, (int) (Math.random() * 50) + 1, (int) (Math.random() * 150) + 51));
+                    System.out.println("[+] Création de voiture réussie : " + this.vehicules.get(this.vehicules.size() - 1) + ", vitesse : " + this.vehicules.get(this.vehicules.size() - 1).getVitesse());
                 } catch (Exception ex) {
                     //Logger.getLogger(Simulateur.class.getName()).log(Level.SEVERE, null, ex);
-                    System.out.println("[!] " + ex.getMessage());
+                    System.out.println("[!] " + ex);//.getMessage());
                 }
             }
 
