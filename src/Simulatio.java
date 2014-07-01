@@ -2,22 +2,16 @@
 import Model.Carte;
 import Model.Intersections.Croisement;
 import Model.Intersections.Intersection;
-import Model.Itineraire;
 import Model.Routes.Route;
-import Model.Routes.RueImpasse;
+import Model.Signalisations.Feu;
 import Model.Signalisations.Signalisation;
 import Model.Simulateur;
 import Model.Vehicules.Vehicule;
-import Model.Vehicules.Voiture;
-import Model.VoieDeCirculation;
-import Model.ZoneSpecifiques.ArretDeBus;
 import Model.ZoneSpecifiques.Station;
 import Model.ZoneSpecifiques.ZoneARisque;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -34,6 +28,7 @@ public class Simulatio {
         Carte c = new Carte();
         List<Intersection> inter = new ArrayList<Intersection>();
         List<Route> routes = new ArrayList<Route>();
+        List<Signalisation> signalisations = new ArrayList<Signalisation>();
 
         Intersection i = new Croisement(new ArrayList<Route>(), 2);
         Intersection i1 = new Croisement(new ArrayList<Route>(), 2);
@@ -43,6 +38,7 @@ public class Simulatio {
         Intersection i5 = new Croisement(new ArrayList<Route>(), 2);
         Intersection i6 = new Croisement(new ArrayList<Route>(), 2);
         Intersection i7 = new Croisement(new ArrayList<Route>(), 2);
+
         Route r = new Route("route1", i, i1, 200, new HashMap<Vehicule, Double>(), new ArrayList<Signalisation>(), new ArrayList<ZoneARisque>(), new ArrayList<Station>());
         Route r1 = new Route("route1[INV]", i1, i, 200, new HashMap<Vehicule, Double>(), new ArrayList<Signalisation>(), new ArrayList<ZoneARisque>(), new ArrayList<Station>());
         Route r2 = new Route("route2", i1, i2, 200, new HashMap<Vehicule, Double>(), new ArrayList<Signalisation>(), new ArrayList<ZoneARisque>(), new ArrayList<Station>());
@@ -57,10 +53,12 @@ public class Simulatio {
         Route r11 = new Route("route8", i2, i3, 200, new HashMap<Vehicule, Double>(), new ArrayList<Signalisation>(), new ArrayList<ZoneARisque>(), new ArrayList<Station>());
         Route r12 = new Route("route7[INV]", i3, i5, 200, new HashMap<Vehicule, Double>(), new ArrayList<Signalisation>(), new ArrayList<ZoneARisque>(), new ArrayList<Station>());
         Route r13 = new Route("route8[INV]", i3, i2, 200, new HashMap<Vehicule, Double>(), new ArrayList<Signalisation>(), new ArrayList<ZoneARisque>(), new ArrayList<Station>());
+
+        Feu f = new Feu(1, 30);
+
         /*i.addRoute(r);
          i1.addRoute(r1);
          i1.addRoute(r2);*/
-
         inter.add(i);
         inter.add(i1);
         inter.add(i2);
@@ -84,8 +82,13 @@ public class Simulatio {
         routes.add(r12);
         routes.add(r13);
 
+        r.ajouterSignalisation(f);
+
+        signalisations.add(f);
+
         c.setListeRoutes(routes);
         c.setListeDesIntersections(inter);
+        c.setListeSignalisations(signalisations);
 
         /*Itineraire it;
          try {
@@ -96,6 +99,7 @@ public class Simulatio {
          }*/
         Simulateur s = new Simulateur();
         s.setCarte(c);
+        s.setSignalisations(signalisations);
         s.start();
     }
 }
