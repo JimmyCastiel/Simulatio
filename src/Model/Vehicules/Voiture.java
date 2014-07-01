@@ -1,6 +1,6 @@
 package Model.Vehicules;
 
-import Model.Intineraire;
+import Model.Itineraire;
 
 public class Voiture extends Vehicule {
 
@@ -8,7 +8,7 @@ public class Voiture extends Vehicule {
      *
      */
 
-    public Voiture(Intineraire intineraire, double longueur, double vitesse, double vitesseMax) {
+    public Voiture(Itineraire intineraire, double longueur, double vitesse, double vitesseMax) throws Exception {
         super(intineraire, longueur, vitesse, vitesseMax);
     }
 }

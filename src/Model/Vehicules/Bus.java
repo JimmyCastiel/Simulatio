@@ -1,6 +1,6 @@
 package Model.Vehicules;
 
-import Model.Intineraire;
+import Model.Itineraire;
 
 public class Bus extends Vehicule {
 
@@ -8,7 +8,7 @@ public class Bus extends Vehicule {
      *
      */
     
-    public Bus(Intineraire intineraire, double longueur, double vitesse, double vitesseMax) {
+    public Bus(Itineraire intineraire, double longueur, double vitesse, double vitesseMax) throws Exception {
         super(intineraire, longueur, vitesse, vitesseMax);
     }
 }

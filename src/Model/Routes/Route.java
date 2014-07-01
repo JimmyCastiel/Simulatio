@@ -14,6 +14,8 @@ import Model.Vehicules.Vehicule;
 import Model.VoieDeCirculation;
 import Model.ZoneSpecifiques.Station;
 import Model.ZoneSpecifiques.ZoneARisque;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -56,6 +58,7 @@ public class Route extends VoieDeCirculation {
         this.signalisations = signalisations;
         this.zonesARisque = zonesARisque;
         this.stations = stations;
+        this.depart.addRoute(this);
     }
 
     public Route() {
@@ -94,6 +97,11 @@ public class Route extends VoieDeCirculation {
             return true;
         }
         return false;
+    }
+
+    public boolean supprimerVehicule(Vehicule v) {
+        this.voie.remove(v);
+        return true;
     }
 
     public void setLongueur(double longueur) {
@@ -138,4 +146,46 @@ public class Route extends VoieDeCirculation {
         return nbStop;
     }
 
+    public Intersection getDepart() {
+        return depart;
+    }
+
+    public Intersection getArrivee() {
+        return arrivee;
+    }
+
+    @Override
+    public String toString() {
+        return "Route{" + "nomRoute=" + nomRoute + ", longueur=" + longueur + ", routePleine=" + routePleine + ", nbFeu=" + nbFeu + ", nbCedezLePassage=" + nbCedezLePassage + ", nbStop=" + nbStop + '}';
+    }
+
+    public void avancer(Vehicule v, double distanceParcourue) {
+        if (this.voie.containsKey(v)) {
+            boolean peutAvancer = true;
+            double distance = this.voie.get(v);
+            double distanceRestante = distance - distanceParcourue;
+            if (distanceRestante <= 0) {
+                this.supprimerVehicule(v);
+                VoieDeCirculation vdc = v.prochainDeplacement();
+                if (vdc != null) {
+                    vdc.ajouterVehicule(v);
+                }
+            } else {
+                for (Map.Entry<Vehicule, Double> entry : this.voie.entrySet()) {
+                    if (!entry.getKey().equals(v)
+                            && entry.getValue() <= distance
+                            && entry.getValue() >= distanceRestante
+                            && entry.getValue() <= distanceRestante - entry.getKey().getLongueur()) {
+                        System.out.println("[!!] Ne peut pas avancer !");
+                        peutAvancer = false;
+                        break;
+                    }
+                }
+            }
+            if (peutAvancer) {
+                this.voie.put(v, distanceRestante);
+                //System.out.println(this.voie.get(v));
+            }
+        }
+    }
 }
