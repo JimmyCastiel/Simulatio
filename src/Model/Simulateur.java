@@ -62,9 +62,8 @@ public class Simulateur extends Thread {
             for (int i = this.vehicules.size(); i < densiteVoiture; i++) {
                 try {
                     //this.vehicules.add(new Voiture(Itineraire.getItineraire(c, c.getListeRoutes().get((int) (Math.random() * c.getListeRoutes().size())), c.getListeRoutes().get((int) (Math.random() * c.getListeRoutes().size()))), 2, 50, 150));
-                    this.vehicules.add(new Voiture(Itineraire.getItineraire(c, c.getListeRoutes().get(0), c.getListeRoutes().get(1)), 2, (int) (Math.random() * 50)+1, (int) (Math.random() * 150)));
-                    System.out.println(this.vehicules.get(i).getVitesse());
-                    System.out.println("[+] Création de voiture réussie : " + this.vehicules.get(i));
+                    this.vehicules.add(new Voiture(Itineraire.getItineraire(c, c.getListeRoutes().get((int) (Math.random() * c.getListeRoutes().size())), c.getListeRoutes().get((int) (Math.random() * c.getListeRoutes().size()))), 2, (int) (Math.random() * 50)+1, (int) (Math.random() * 150)));
+                    System.out.println("[+] Création de voiture réussie : " + this.vehicules.get(this.vehicules.size()) + ", vitesse : " + this.vehicules.get(this.vehicules.size()).getVitesse());
                 } catch (Exception ex) {
                     //Logger.getLogger(Simulateur.class.getName()).log(Level.SEVERE, null, ex);
                     System.out.println("[!] " + ex.getMessage());

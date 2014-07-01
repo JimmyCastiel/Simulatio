@@ -74,6 +74,7 @@ public class Itineraire {
         Itineraire i = new Itineraire(c, depart, arrivee);
         List<VoieDeCirculation> l;
         l = calculerItineraire(depart, arrivee);
+        //l = calculerItineraire2(c, depart, arrivee);
         if (l != null) {
             i.setParcours(l);
         } else {
@@ -111,6 +112,63 @@ public class Itineraire {
                     tmp = parcoursGraphe(depart, r.getArrivee(), arrivee);
                 }
             } else if (intersectionPrecendente == null) {
+                tmp = parcoursGraphe(depart, r.getArrivee(), arrivee);
+            }
+            if (tmp != null) {
+                parcours.add(r);
+                parcours.addAll(tmp);
+                return (parcours);
+            }
+            //}
+        }
+
+        return null;
+    }
+
+    private static List<VoieDeCirculation> calculerItineraire2(Carte c, Route depart, Route arrivee) {
+        List<VoieDeCirculation> chemin = new ArrayList<VoieDeCirculation>();
+        List<List<VoieDeCirculation>> tmp = new ArrayList<List<VoieDeCirculation>>();
+        List<VoieDeCirculation> best = new ArrayList<VoieDeCirculation>();
+        int taille = c.getListeDesIntersections().size() + c.getListeRoutes().size();
+
+        for (Route r : depart.getArrivee().getRoutes()) {
+            tmp.add(parcoursGraphe2(r.getArrivee(), arrivee.getDepart()));
+        }
+
+        if (tmp == null) {
+            return null;
+        }
+
+        chemin.add(depart);
+        chemin.add(depart.getArrivee());
+        for (List<VoieDeCirculation> liste : tmp) {
+            if (liste != null) {
+                if (liste.size() <= taille && !liste.isEmpty()) {
+                    best = liste;
+                    taille = best.size();
+                }
+            }
+        }
+        if (!best.isEmpty()) {
+            chemin.addAll(best);
+            chemin.add(arrivee);
+        } else {
+            chemin = null;
+        }
+        return chemin;
+    }
+
+    private static List<VoieDeCirculation> parcoursGraphe2(Intersection depart, Intersection arrivee) {
+        List<VoieDeCirculation> parcours = new ArrayList<VoieDeCirculation>();
+        parcours.add(depart);
+        for (Route r : depart.getRoutes()) {
+            List<VoieDeCirculation> tmp = null;
+            //if (!(r instanceof RueImpasse)) {
+            if (r.getArrivee().equals(arrivee)) {
+                parcours.add(r);
+                parcours.add(r.getArrivee());
+                return (parcours);
+            } else {
                 tmp = parcoursGraphe(depart, r.getArrivee(), arrivee);
             }
             if (tmp != null) {

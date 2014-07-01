@@ -8,7 +8,7 @@ public class Bus extends Vehicule {
      *
      */
     
-    public Bus(Itineraire intineraire, double longueur, double vitesse, double vitesseMax) {
+    public Bus(Itineraire intineraire, double longueur, double vitesse, double vitesseMax) throws Exception {
         super(intineraire, longueur, vitesse, vitesseMax);
     }
 }
