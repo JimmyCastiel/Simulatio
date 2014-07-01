@@ -171,7 +171,8 @@ public class Route extends VoieDeCirculation {
                 if (f != null) {
                     if (f.getCouleurFeu() != CouleurFeu.ROUGE) {
                         this.avancerRoute(v);
-                        System.out.println("[!!] Ne peut pas avancer !");
+                    } else {
+                        System.out.println("[!!] Ne peut pas avancer ! Feu Rouge");
                     }
                 } else {
                     this.avancerRoute(v);
@@ -182,7 +183,7 @@ public class Route extends VoieDeCirculation {
                             && entry.getValue() <= distance
                             && entry.getValue() >= distanceRestante
                             && entry.getValue() <= distanceRestante - entry.getKey().getLongueur()) {
-                        System.out.println("[!!] Ne peut pas avancer !");
+                        System.out.println("[!!] Ne peut pas avancer ! Voiture devant");
                         peutAvancer = false;
                         break;
                     }

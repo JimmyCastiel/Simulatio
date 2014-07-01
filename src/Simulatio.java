@@ -54,7 +54,7 @@ public class Simulatio {
         Route r12 = new Route("route7[INV]", i3, i5, 200, new HashMap<Vehicule, Double>(), new ArrayList<Signalisation>(), new ArrayList<ZoneARisque>(), new ArrayList<Station>());
         Route r13 = new Route("route8[INV]", i3, i2, 200, new HashMap<Vehicule, Double>(), new ArrayList<Signalisation>(), new ArrayList<ZoneARisque>(), new ArrayList<Station>());
 
-        Feu f = new Feu(1, 30);
+        Feu f = new Feu(1, 6000);
 
         /*i.addRoute(r);
          i1.addRoute(r1);
