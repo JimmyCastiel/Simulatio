@@ -75,4 +75,8 @@ public class Carte {
         return false;
     }
 
+    public void addRoute(Route r) {
+        listeRoutes.add(r);
+    }
+
 }

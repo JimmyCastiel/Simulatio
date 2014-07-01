@@ -59,7 +59,7 @@ public class Route extends VoieDeCirculation {
     }
 
     public Route() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
     }
 
     public boolean ajouterSignalisation(Signalisation s) {
