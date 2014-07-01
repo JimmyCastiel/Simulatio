@@ -62,10 +62,10 @@ public class Simulateur extends Thread {
             for (int i = this.vehicules.size(); i < densiteVoiture; i++) {
                 try {
                     this.vehicules.add(new Voiture(Itineraire.getItineraire(c, c.getListeRoutes().get((int) (Math.random() * c.getListeRoutes().size())), c.getListeRoutes().get((int) (Math.random() * c.getListeRoutes().size()))), 2, 50, 150));
-                    System.out.println("Création de voiture réussie : " + this.vehicules.get(i));
+                    System.out.println("[+] Création de voiture réussie : " + this.vehicules.get(i));
                 } catch (Exception ex) {
                     //Logger.getLogger(Simulateur.class.getName()).log(Level.SEVERE, null, ex);
-                    System.out.println(ex.getMessage());
+                    System.out.println("[!] " + ex.getMessage());
                 }
             }
 
@@ -77,7 +77,7 @@ public class Simulateur extends Thread {
                     r.avancer(v, distanceParcourue);
                 } else {
                     vehiculesASupprimer.add(v);
-                    System.out.println("Ajout d'un véhicule à supprimer : " + v);
+                    System.out.println("[+] Ajout d'un véhicule à supprimer : " + v);
                 }
                 /*} else {
                  while (v.prochainDeplacement() instanceof Intersection) {
@@ -89,7 +89,7 @@ public class Simulateur extends Thread {
 
             for (Vehicule vehicule : vehiculesASupprimer) {
                 this.vehicules.remove(vehicule);
-                System.out.println("Vehicule supprimé : " + vehicule);
+                System.out.println("[-] Vehicule supprimé : " + vehicule);
             }
 
             vehiculesASupprimer.clear();

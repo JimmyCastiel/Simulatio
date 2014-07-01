@@ -14,6 +14,8 @@ import Model.Vehicules.Vehicule;
 import Model.VoieDeCirculation;
 import Model.ZoneSpecifiques.Station;
 import Model.ZoneSpecifiques.ZoneARisque;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -159,6 +161,7 @@ public class Route extends VoieDeCirculation {
 
     public void avancer(Vehicule v, double distanceParcourue) {
         if (this.voie.containsKey(v)) {
+            boolean peutAvancer = true;
             double distance = this.voie.get(v);
             double distanceRestante = distance - distanceParcourue;
             if (distanceRestante <= 0) {
@@ -168,6 +171,14 @@ public class Route extends VoieDeCirculation {
                     vdc.ajouterVehicule(v);
                 }
             } else {
+                for (Map.Entry<Vehicule, Double> entry : this.voie.entrySet()) {
+                    if (!entry.getKey().equals(v) && (entry.getValue() >= distanceRestante && entry.getValue() <= distanceRestante - v.getLongueur())) {
+                        peutAvancer = false;
+                        break;
+                    }
+                }
+            }
+            if (peutAvancer) {
                 this.voie.put(v, distanceRestante);
                 //System.out.println(this.voie.get(v));
             }
