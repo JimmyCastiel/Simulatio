@@ -78,7 +78,7 @@ public class Itineraire {
         if (l != null) {
             i.setParcours(l);
         } else {
-            throw new Exception("Probleme lors de la génération de l'itinéraire !");
+            throw new Exception("Probleme lors de la génération de l'itinéraire entre les route : " + depart.getNomRoute() + " et " + arrivee.getNomRoute() + "!");
         }
         return i;
     }

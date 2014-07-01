@@ -52,9 +52,11 @@ public class Simulatio {
         Route r6 = new Route("route4[INV]", i7, i4, 200, new HashMap<Vehicule, Double>(), new ArrayList<Signalisation>(), new ArrayList<ZoneARisque>(), new ArrayList<Station>());
         Route r7 = new Route("route5", i7, i6, 200, new HashMap<Vehicule, Double>(), new ArrayList<Signalisation>(), new ArrayList<ZoneARisque>(), new ArrayList<Station>());
         Route r8 = new Route("route6", i6, i5, 200, new HashMap<Vehicule, Double>(), new ArrayList<Signalisation>(), new ArrayList<ZoneARisque>(), new ArrayList<Station>());
-        Route r9 = new Route("route6[inv]", i5, i6, 200, new HashMap<Vehicule, Double>(), new ArrayList<Signalisation>(), new ArrayList<ZoneARisque>(), new ArrayList<Station>());
+        Route r9 = new Route("route6[INV]", i5, i6, 200, new HashMap<Vehicule, Double>(), new ArrayList<Signalisation>(), new ArrayList<ZoneARisque>(), new ArrayList<Station>());
         Route r10 = new Route("route7", i5, i3, 200, new HashMap<Vehicule, Double>(), new ArrayList<Signalisation>(), new ArrayList<ZoneARisque>(), new ArrayList<Station>());
         Route r11 = new Route("route8", i2, i3, 200, new HashMap<Vehicule, Double>(), new ArrayList<Signalisation>(), new ArrayList<ZoneARisque>(), new ArrayList<Station>());
+        Route r12 = new Route("route7[INV]", i3, i5, 200, new HashMap<Vehicule, Double>(), new ArrayList<Signalisation>(), new ArrayList<ZoneARisque>(), new ArrayList<Station>());
+        Route r13 = new Route("route8[INV]", i3, i2, 200, new HashMap<Vehicule, Double>(), new ArrayList<Signalisation>(), new ArrayList<ZoneARisque>(), new ArrayList<Station>());
         /*i.addRoute(r);
          i1.addRoute(r1);
          i1.addRoute(r2);*/
@@ -79,6 +81,8 @@ public class Simulatio {
         routes.add(r9);
         routes.add(r10);
         routes.add(r11);
+        routes.add(r12);
+        routes.add(r13);
 
         c.setListeRoutes(routes);
         c.setListeDesIntersections(inter);
