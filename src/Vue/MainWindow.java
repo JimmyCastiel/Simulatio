@@ -4,9 +4,12 @@
  */
 package Vue;
 
+import Model.Carte;
+import Model.Routes.Route;
 import Model.Signalisations.CouleurFeu;
 import Model.Signalisations.Feu;
 import Model.Signalisations.Panneau;
+import Vue.Panel.VueCarte;
 import Vue.Signalisations.VueFeu;
 import Vue.Signalisations.VuePanneau;
 import java.awt.BorderLayout;
@@ -80,8 +83,11 @@ public class MainWindow extends CircuFrame{
     private JButton 	buttonSave;
     private JButton 	buttonPreferences;
     
+    //Modeles
+    private Carte c = new Carte();
+    
     //Carte
-    private JPanel carteContainer;
+    private VueCarte carteContainer;
     private boolean isMapEmpty;
     
     //Gestion
@@ -236,7 +242,10 @@ public class MainWindow extends CircuFrame{
         this.getContentPane().add(toolBar, BorderLayout.NORTH);    
         
         //Creation du container avec la carte
-        this.carteContainer = new JPanel(new GridLayout());
+
+        this.carteContainer = new VueCarte(c);
+        GridLayout gd = new GridLayout(2,2);
+        carteContainer.setLayout(gd);
         this.isMapEmpty = true;
         
         //Partie gestion simulation
@@ -274,15 +283,15 @@ public class MainWindow extends CircuFrame{
         
 //        this.panelGestion.setPreferredSize(new Dimension(5,this.panelGestion.getPreferredSize().height));
         //Tests
-        this.carteContainer = new JPanel();
+
         f = new Feu(0,1000);
 //        vf = new VueFeu(f);
         String s = "Cedez-le-passage";
         p = new Panneau(s);
         vp = new VuePanneau(p);
 //        this.carteContainer.add(vf);
-        this.carteContainer.add(vp);
-        this.carteContainer.setBackground(Color.blue);
+//        this.carteContainer.add(vp);
+//        this.carteContainer.setBackground(Color.red);
         // CREATION splitpanes
         this.verSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, panelGestion, carteContainer);
         this.verSplitPane.setResizeWeight(0.5);
