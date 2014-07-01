@@ -44,7 +44,7 @@ public class Simulateur extends Thread {
     }
 
     public Simulateur() {
-        this(new Carte(), new ArrayList<Signalisation>(), new ArrayList<Vehicule>(), 1000, 10, 10, 100);
+        this(new Carte(), new ArrayList<Signalisation>(), new ArrayList<Vehicule>(), 1000, 100, 10, 100);
     }
 
     @Override
@@ -58,6 +58,7 @@ public class Simulateur extends Thread {
              dateFormatComp = new SimpleDateFormat("dd MMM yyyy hh:mm:ss a");
              System.out.println(dateFormatComp.format(date));
              System.out.println(date.getTime());*/
+            int nbVoituresCrees = 0;
 
             for (int i = this.vehicules.size(); i < densiteVoiture; i++) {
                 try {
@@ -67,11 +68,14 @@ public class Simulateur extends Thread {
                     //this.vehicules.add(new Voiture(Itineraire.getItineraire(c, c.getListeRoutes().get((int) (Math.random() * c.getListeRoutes().size())), c.getListeRoutes().get((int) (Math.random() * c.getListeRoutes().size()))), 2, 50, 150));
                     this.vehicules.add(new Voiture(Itineraire.getItineraire(c, c.getListeRoutes().get(route1), c.getListeRoutes().get(route2)), 2, (int) (Math.random() * 50) + 1, (int) (Math.random() * 150) + 51));
                     System.out.println("[+] Création de voiture réussie : " + this.vehicules.get(this.vehicules.size() - 1) + ", vitesse : " + this.vehicules.get(this.vehicules.size() - 1).getVitesse());
+                    nbVoituresCrees++;
                 } catch (Exception ex) {
                     //Logger.getLogger(Simulateur.class.getName()).log(Level.SEVERE, null, ex);
                     System.out.println("[!] " + ex);//.getMessage());
                 }
             }
+
+            if (nbVoituresCrees > 0) System.out.println("[?] Nombre de voitures créées : " + nbVoituresCrees);
 
             for (Vehicule v : this.vehicules) {
                 //if (!(v.getVoiePrecedente() instanceof Intersection)) {
