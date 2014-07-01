@@ -44,7 +44,7 @@ public class Simulateur extends Thread {
     }
 
     public Simulateur() {
-        this(new Carte(), new ArrayList<Signalisation>(), new ArrayList<Vehicule>(), 10000, 10, 10, 100);
+        this(new Carte(), new ArrayList<Signalisation>(), new ArrayList<Vehicule>(), 1000, 10, 10, 100);
     }
 
     @Override
@@ -61,7 +61,9 @@ public class Simulateur extends Thread {
 
             for (int i = this.vehicules.size(); i < densiteVoiture; i++) {
                 try {
-                    this.vehicules.add(new Voiture(Itineraire.getItineraire(c, c.getListeRoutes().get((int) (Math.random() * c.getListeRoutes().size())), c.getListeRoutes().get((int) (Math.random() * c.getListeRoutes().size()))), 2, 50, 150));
+                    //this.vehicules.add(new Voiture(Itineraire.getItineraire(c, c.getListeRoutes().get((int) (Math.random() * c.getListeRoutes().size())), c.getListeRoutes().get((int) (Math.random() * c.getListeRoutes().size()))), 2, 50, 150));
+                    this.vehicules.add(new Voiture(Itineraire.getItineraire(c, c.getListeRoutes().get(0), c.getListeRoutes().get(1)), 2, (int) (Math.random() * 50)+1, (int) (Math.random() * 150)));
+                    System.out.println(this.vehicules.get(i).getVitesse());
                     System.out.println("[+] Création de voiture réussie : " + this.vehicules.get(i));
                 } catch (Exception ex) {
                     //Logger.getLogger(Simulateur.class.getName()).log(Level.SEVERE, null, ex);

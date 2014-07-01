@@ -172,7 +172,11 @@ public class Route extends VoieDeCirculation {
                 }
             } else {
                 for (Map.Entry<Vehicule, Double> entry : this.voie.entrySet()) {
-                    if (!entry.getKey().equals(v) && (entry.getValue() >= distanceRestante && entry.getValue() <= distanceRestante - v.getLongueur())) {
+                    if (!entry.getKey().equals(v)
+                            && entry.getValue() <= distance
+                            && entry.getValue() >= distanceRestante
+                            && entry.getValue() <= distanceRestante - entry.getKey().getLongueur()) {
+                        System.out.println("[!!] Ne peut pas avancer !");
                         peutAvancer = false;
                         break;
                     }
