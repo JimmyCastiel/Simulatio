@@ -24,6 +24,7 @@ import java.util.logging.Logger;
  */
 public class Simulateur extends Thread {
 
+    private AffichageSimulateur affichage;
     private List<Signalisation> signalisations;
     private List<Vehicule> vehicules;
     private Carte c;
@@ -34,6 +35,8 @@ public class Simulateur extends Thread {
     private int dureeFeux;
 
     public Simulateur(Carte c, List<Signalisation> signalisations, List<Vehicule> voitures, double valeurSeconde, int densiteVoiture, long vitesseBoucle, int dureeFeux) {
+        this.affichage = new AffichageSimulateur();
+
         this.c = c;
         this.signalisations = signalisations;
         this.vehicules = voitures;
@@ -67,15 +70,20 @@ public class Simulateur extends Thread {
                     route2 = (int) (Math.random() * (c.getListeRoutes().size() - 1));
                     //this.vehicules.add(new Voiture(Itineraire.getItineraire(c, c.getListeRoutes().get((int) (Math.random() * c.getListeRoutes().size())), c.getListeRoutes().get((int) (Math.random() * c.getListeRoutes().size()))), 2, 50, 150));
                     this.vehicules.add(new Voiture(Itineraire.getItineraire(c, c.getListeRoutes().get(route1), c.getListeRoutes().get(route2)), 2, (int) (Math.random() * 50) + 1, (int) (Math.random() * 150) + 51));
-                    System.out.println("[+] Création de voiture réussie : " + this.vehicules.get(this.vehicules.size() - 1) + ", vitesse : " + this.vehicules.get(this.vehicules.size() - 1).getVitesse());
+                    //System.out.println("[+] Création de voiture réussie : " + this.vehicules.get(this.vehicules.size() - 1) + ", vitesse : " + this.vehicules.get(this.vehicules.size() - 1).getVitesse());
+                    this.affichage.ajouterMessage(("[+] Création de voiture réussie : " + this.vehicules.get(this.vehicules.size() - 1) + ", vitesse : " + this.vehicules.get(this.vehicules.size() - 1).getVitesse()));
                     nbVoituresCrees++;
                 } catch (Exception ex) {
                     //Logger.getLogger(Simulateur.class.getName()).log(Level.SEVERE, null, ex);
-                    System.out.println("[!] " + ex);//.getMessage());
+                    //System.out.println("[!] " + ex);//.getMessage());
+                    this.affichage.ajouterMessage(ex.toString());
                 }
             }
 
-            if (nbVoituresCrees > 0) System.out.println("[?] Nombre de voitures créées : " + nbVoituresCrees);
+            if (nbVoituresCrees > 0) {
+                //System.out.println("[?] Nombre de véhicules créés : " + nbVoituresCrees);
+                this.affichage.ajouterMessage("[?] Nombre de véhicules créés : " + nbVoituresCrees);
+            }
 
             for (Vehicule v : this.vehicules) {
                 //if (!(v.getVoiePrecedente() instanceof Intersection)) {
@@ -85,7 +93,8 @@ public class Simulateur extends Thread {
                     r.avancer(v, distanceParcourue);
                 } else {
                     vehiculesASupprimer.add(v);
-                    System.out.println("[+] Ajout d'un véhicule à supprimer : " + v);
+                    //System.out.println("[+] Ajout d'un véhicule à supprimer : " + v);
+                    this.affichage.ajouterMessage("[+] Ajout d'un véhicule à supprimer : " + v);
                 }
                 /*} else {
                  while (v.prochainDeplacement() instanceof Intersection) {
@@ -97,7 +106,13 @@ public class Simulateur extends Thread {
 
             for (Vehicule vehicule : vehiculesASupprimer) {
                 this.vehicules.remove(vehicule);
-                System.out.println("[-] Vehicule supprimé : " + vehicule);
+                //System.out.println("[-] Vehicule supprimé : " + vehicule);
+                this.affichage.ajouterMessage("[-] Vehicule supprimé : " + vehicule);
+            }
+
+            if (!vehiculesASupprimer.isEmpty()) {
+                //System.out.println("[?] Nombre de véhicules supprimés : " + vehiculesASupprimer.size());
+                this.affichage.ajouterMessage("[?] Nombre de véhicules supprimés : " + vehiculesASupprimer.size());
             }
 
             vehiculesASupprimer.clear();
@@ -118,6 +133,8 @@ public class Simulateur extends Thread {
             } catch (InterruptedException ex) {
                 Logger.getLogger(Simulateur.class.getName()).log(Level.SEVERE, null, ex);
             }
+
+            this.affichage.start();
         }
     }
 

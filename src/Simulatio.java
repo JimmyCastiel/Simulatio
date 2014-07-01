@@ -98,5 +98,4 @@ public class Simulatio {
         s.setCarte(c);
         s.start();
     }
-
 }
