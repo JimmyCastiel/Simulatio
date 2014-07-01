@@ -6,6 +6,7 @@
 package Model.Routes;
 
 import Model.Intersections.Intersection;
+import Model.Signalisations.CouleurFeu;
 import Model.Signalisations.Feu;
 import Model.Signalisations.PanneauCedezLePassage;
 import Model.Signalisations.PanneauStop;
@@ -160,11 +161,20 @@ public class Route extends VoieDeCirculation {
             boolean peutAvancer = true;
             double distance = this.voie.get(v);
             double distanceRestante = distance - distanceParcourue;
+            Feu f = null;
             if (distanceRestante <= 0) {
-                this.supprimerVehicule(v);
-                VoieDeCirculation vdc = v.prochainDeplacement();
-                if (vdc != null) {
-                    vdc.ajouterVehicule(v);
+                for (Signalisation signalisation : this.signalisations) {
+                    if (signalisation instanceof Feu) {
+                        f = (Feu) signalisation;
+                    }
+                }
+                if (f != null) {
+                    if (f.getCouleurFeu() != CouleurFeu.ROUGE) {
+                        this.avancerRoute(v);
+                        System.out.println("[!!] Ne peut pas avancer !");
+                    }
+                } else {
+                    this.avancerRoute(v);
                 }
             } else {
                 for (Map.Entry<Vehicule, Double> entry : this.voie.entrySet()) {
@@ -184,4 +194,13 @@ public class Route extends VoieDeCirculation {
             }
         }
     }
+
+    private void avancerRoute(Vehicule v) {
+        this.supprimerVehicule(v);
+        VoieDeCirculation vdc = v.prochainDeplacement();
+        if (vdc != null) {
+            vdc.ajouterVehicule(v);
+        }
+    }
+
 }

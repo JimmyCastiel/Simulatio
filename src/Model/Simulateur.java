@@ -5,18 +5,13 @@
  */
 package Model;
 
-import Model.Intersections.Intersection;
 import Model.Routes.Route;
 import Model.Signalisations.Feu;
 import Model.Signalisations.Signalisation;
 import Model.Vehicules.Vehicule;
 import Model.Vehicules.Voiture;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -108,6 +103,7 @@ public class Simulateur extends Thread {
                 if (s instanceof Feu) {
                     Feu f = (Feu) s;
                     f.avancer(this.valeurSeconde);
+                    this.affichage.ajouterMessage("[?] Feu avancé : " + f.getCouleurFeu().toString());
                 }
             }
 
@@ -139,5 +135,9 @@ public class Simulateur extends Thread {
 
     public void setCarte(Carte c) {
         this.c = c;
+    }
+
+    public void setSignalisations(List<Signalisation> signalisations) {
+        this.signalisations = signalisations;
     }
 }

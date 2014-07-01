@@ -1,12 +1,14 @@
 package Model.Signalisations;
 
 import java.awt.Color;
+import java.util.Date;
 
 public class Feu extends Signalisation {
 
     private int idFeu;
     private int duree;
     private CouleurFeu couleurFeu;
+    private Date dernierAppel;
 
     public Feu(int idFeu, int duree) {
         this.idFeu = idFeu;
@@ -43,6 +45,16 @@ public class Feu extends Signalisation {
     }
 
     public void avancer(double valeurSeconde) {
+        if (this.dernierAppel == null) {
+            this.dernierAppel = new Date();
+        } else {
+            Date appel = new Date();
+            long espaceEntreAppels = (appel.getTime() - this.dernierAppel.getTime()) * 1000;
+            if (espaceEntreAppels >= (this.duree * 1000)) {
+                this.dernierAppel = appel;
+                this.couleurFeu = this.couleurFeu.suivant();
+            }
+        }
 
     }
 }
