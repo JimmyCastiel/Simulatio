@@ -29,9 +29,17 @@ public class AffichageSimulateur {
         this.messages.add(msg);
     }
 
-    public void start() {
+    public void start(String type) {
         for (String string : this.messages) {
-            System.out.println(string);
+            if (type.contains("*")) {
+                System.out.println(string);
+            } else {
+                if (string.contains(type)) {
+                    System.out.println(string);
+                }
+            }
+
         }
+        this.messages.clear();
     }
 }

@@ -74,7 +74,7 @@ public class Simulateur extends Thread {
 
                     nbVoituresCrees++;
                 } catch (Exception ex) {
-                    this.affichage.ajouterMessage(ex.toString());
+                    this.affichage.ajouterMessage("[!] " + ex.toString());
                 }
             }
 
@@ -122,7 +122,7 @@ public class Simulateur extends Thread {
                 this.affichage.ajouterMessage(ex.toString());
             }
 
-            //this.affichage.start();
+            this.affichage.start("[+]");
         }
     }
 
