@@ -9,9 +9,12 @@ import Model.Simulateur;
 import Model.Vehicules.Vehicule;
 import Model.ZoneSpecifiques.Station;
 import Model.ZoneSpecifiques.ZoneARisque;
+import Vue.MainWindow;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -25,6 +28,18 @@ import java.util.List;
 public class Simulatio {
 
     public static void main(String[] args) {
+        
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                MainWindow window = MainWindow.getInstance();
+            }
+        });
+
         Carte c = new Carte();
         List<Intersection> inter = new ArrayList<Intersection>();
         List<Route> routes = new ArrayList<Route>();
