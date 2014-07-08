@@ -103,7 +103,7 @@ public class Simulateur extends Thread {
                 if (s instanceof Feu) {
                     Feu f = (Feu) s;
                     f.avancer(this.valeurSeconde);
-                    this.affichage.ajouterMessage("[?] Feu avancé : " + f.getCouleurFeu().toString());
+                    this.affichage.ajouterMessage("[??] Feu n°" + f.getIdFeu() + " avancé : " + f.getCouleurFeu().toString());
                 }
             }
 
@@ -118,7 +118,7 @@ public class Simulateur extends Thread {
                 this.affichage.ajouterMessage(ex.toString());
             }
 
-            this.affichage.start("[1]");
+            this.affichage.start("[*]");
         }
     }
 
