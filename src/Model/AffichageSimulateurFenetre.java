@@ -55,6 +55,7 @@ public class AffichageSimulateurFenetre extends AffichageSimulateur {
             }
         }
         this.jt.setText(tmp);
+        super.start(type);
         this.messages.clear();
     }
 }
