@@ -45,7 +45,7 @@ public class Simulateur extends Thread {
     }
 
     public Simulateur() {
-        this(new Carte(), new ArrayList<Signalisation>(), new ArrayList<Vehicule>(), 1000, 100, 10, 100);
+        this(new Carte(), new ArrayList<Signalisation>(), new ArrayList<Vehicule>(), 1000, 5, 10, 100);
     }
 
     @Override

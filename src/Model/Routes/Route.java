@@ -174,7 +174,7 @@ public class Route extends VoieDeCirculation {
                         this.avancerRoute(v);
                     } else {
                         //System.out.println("[!!] Ne peut pas avancer ! Feu Rouge");
-                        throw new AvancerException("[!!] Ne peut pas avancer ! Feu Rouge");
+                        throw new AvancerException("[!!] Ne peut pas avancer ! Feu n°" + f.getIdFeu() + " au Rouge");
                     }
                 } else {
                     this.avancerRoute(v);
@@ -187,14 +187,14 @@ public class Route extends VoieDeCirculation {
                         }
                     }
                     /*if (!entry.getKey().equals(v)
-                            && entry.getValue() <= distance
-                            && entry.getValue() >= distanceRestante
-                            && entry.getValue() <= distanceRestante - entry.getKey().getLongueur()) {
-                        //System.out.println("[!!] Ne peut pas avancer ! Voiture devant");
-                        throw new AvancerException("[!!] Ne peut pas avancer ! Voiture devant");
-                        //peutAvancer = false;
-                        //break;
-                    }*/
+                     && entry.getValue() <= distance
+                     && entry.getValue() >= distanceRestante
+                     && entry.getValue() <= distanceRestante - entry.getKey().getLongueur()) {
+                     //System.out.println("[!!] Ne peut pas avancer ! Voiture devant");
+                     throw new AvancerException("[!!] Ne peut pas avancer ! Voiture devant");
+                     //peutAvancer = false;
+                     //break;
+                     }*/
                 }
             }
             if (peutAvancer) {

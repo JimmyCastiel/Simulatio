@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package VueRoute;
+package Vue.Routes;
 
 import Model.Routes.Route;
 import java.awt.Color;

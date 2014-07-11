@@ -9,7 +9,7 @@ import Model.Routes.Route;
 import Model.Simulateur;
 import Model.Vehicules.Vehicule;
 import Vue.Vehicules.VueVehicule;
-import VueRoute.VueRoute;
+import Vue.Routes.VueRoute;
 import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JPanel;
