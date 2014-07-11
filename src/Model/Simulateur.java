@@ -125,7 +125,7 @@ public class Simulateur extends Thread {
                 this.affichage.ajouterMessage(ex.toString());
             }
 
-            this.affichage.start("[*]");
+            this.affichage.start("[!!]");
         }
     }
 

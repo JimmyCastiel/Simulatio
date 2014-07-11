@@ -181,7 +181,12 @@ public class Route extends VoieDeCirculation {
                 }
             } else {
                 for (Map.Entry<Vehicule, Double> entry : this.voie.entrySet()) {
-                    if (!entry.getKey().equals(v)
+                    if (!entry.getKey().equals(v) && entry.getValue() < this.voie.get(v)) {
+                        if (entry.getValue() <= distanceRestante - entry.getKey().getLongueur()) {
+                            throw new AvancerException("[!!] Ne peut pas avancer ! Voiture devant");
+                        }
+                    }
+                    /*if (!entry.getKey().equals(v)
                             && entry.getValue() <= distance
                             && entry.getValue() >= distanceRestante
                             && entry.getValue() <= distanceRestante - entry.getKey().getLongueur()) {
@@ -189,7 +194,7 @@ public class Route extends VoieDeCirculation {
                         throw new AvancerException("[!!] Ne peut pas avancer ! Voiture devant");
                         //peutAvancer = false;
                         //break;
-                    }
+                    }*/
                 }
             }
             if (peutAvancer) {
