@@ -61,9 +61,9 @@ public class VueCarte extends JPanel{
        
        //Ligne discontinue
        g.setColor(Color.white);
-       g.fillRect(5,137,30,10);
+       g.fillRect(225,137,30,10);
        g.setColor(Color.white);
-       g.fillRect(45,137,30,10);
+       g.fillRect(270,137,30,10);
        
        //Route verticale
        g.setColor(Color.black);
