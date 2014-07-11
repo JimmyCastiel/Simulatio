@@ -40,6 +40,7 @@ public class Simulatio {
             }
         });
 
+
 //        Carte c = new Carte();
 //        List<Intersection> inter = new ArrayList<Intersection>();
 //        List<Route> routes = new ArrayList<Route>();
@@ -125,5 +126,6 @@ public class Simulatio {
 //        s.setCarte(c);
 //        s.setSignalisations(signalisations);
 //        s.start();
+
     }
 }
