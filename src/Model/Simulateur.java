@@ -46,9 +46,9 @@ public class Simulateur extends Thread {
     }
 
     @Override
-    public synchronized void start() {
+    public synchronized void run() {
         List<Vehicule> vehiculesASupprimer = new ArrayList<Vehicule>();
-        super.start(); //To change body of generated methods, choose Tools | Templates.
+//        super.start(); //To change body of generated methods, choose Tools | Templates.
         while (true) {
             /*Date date = new Date();
              SimpleDateFormat dateFormatComp;
@@ -139,5 +139,9 @@ public class Simulateur extends Thread {
 
     public void setSignalisations(List<Signalisation> signalisations) {
         this.signalisations = signalisations;
+    }
+    
+    public List<Vehicule> getListVehicules(){
+        return this.vehicules;
     }
 }
