@@ -54,8 +54,10 @@ public class AffichageSimulateurFenetre extends AffichageSimulateur {
                 }
             }
         }
-        this.jt.setText(tmp);
-        super.start(type);
+        if (!tmp.equals("") && !tmp.equals("\r\n")) {
+            this.jt.setText(tmp);
+            super.start(type);
+        }
         this.messages.clear();
     }
 }
