@@ -6,6 +6,9 @@ package Vue.Panel;
 
 import Model.Carte;
 import Model.Routes.Route;
+import Model.Simulateur;
+import Model.Vehicules.Vehicule;
+import Vue.Vehicules.VueVehicule;
 import VueRoute.VueRoute;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -17,26 +20,60 @@ import javax.swing.JPanel;
  */
 public class VueCarte extends JPanel{
     
-    private Carte carteModele;
+    //private Carte carteModele;
+    private Simulateur simuModele;
     private VueRoute vr;
     
-    public VueCarte(Carte cm){
+    public VueCarte(Simulateur simu){
         super();
-        this.carteModele = cm;
+        this.simuModele = simu;
     }
     
 
     public void paintComponent(Graphics g){
-           //Première intersection
-           g.setColor(Color.white);
-           g.fillRect(0, 0, this.getWidth(), this.getHeight());
+       /*****Première intersection****/
+        
+       //Route horizontale 
+       g.setColor(Color.black);
+       g.fillRect(0, 100, 300, 100);
+       
+       //Ligne discontinue
+       g.setColor(Color.white);
+       g.fillRect(5,137,30,10);
+       g.setColor(Color.white);
+       g.fillRect(45,137,30,10);
+               
+       /* passage du pieton */
+       g.setColor(Color.white);
+       g.fillRect(85,110, 30,10);
+       g.setColor(Color.white);
+       g.fillRect(85,137,30,10);
+       g.setColor(Color.white);
+       g.fillRect(85,170,30,10);
+       
+       /* passage du pieton */
+       g.setColor(Color.white);
+       g.fillRect(185,110, 30,10);
+       g.setColor(Color.white);
+       g.fillRect(185,137,30,10);
+       g.setColor(Color.white);
+       g.fillRect(185,170,30,10);
+       
+       //Ligne discontinue
+       g.setColor(Color.white);
+       g.fillRect(5,137,30,10);
+       g.setColor(Color.white);
+       g.fillRect(45,137,30,10);
+       
+       //Route verticale
+       g.setColor(Color.black);
+       g.fillRect(100,0,100 ,300);
+;
+       
 
-           /* route  horizontale */
-           g.setColor(Color.black);
-           g.fillRect(0, 100, 300, 100);
-           g.fillRect(100,0,100 ,300);
 
            //Deuxième intersection
+           g.setColor(Color.black);
            g.fillRect(300, 100, 300, 100);
            g.fillRect(100+100+100+100,0,100 ,300);
            
@@ -49,7 +86,13 @@ public class VueCarte extends JPanel{
            g.fillRect(100+100+100, 100+100+100+100, 300, 100);
            g.fillRect(100+100+100+100,300,100 ,300);
            /*fin route*/
-
+           
+           for(Vehicule v : simuModele.getListVehicules()){
+             g.setColor(Color.red);
+             g.fillRect(v.getX(),v.getY(),10,110);
+           }
+           
+           
            
 
 
