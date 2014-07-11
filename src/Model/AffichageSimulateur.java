@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class AffichageSimulateur {
 
-    private List<String> messages;
+    protected List<String> messages;
 
     public AffichageSimulateur(List<String> messages) {
         this.messages = messages;

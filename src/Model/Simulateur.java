@@ -5,6 +5,7 @@
  */
 package Model;
 
+import Model.Routes.AvancerException;
 import Model.Routes.Route;
 import Model.Signalisations.Feu;
 import Model.Signalisations.Signalisation;
@@ -12,6 +13,8 @@ import Model.Vehicules.Vehicule;
 import Model.Vehicules.Voiture;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -30,7 +33,7 @@ public class Simulateur extends Thread {
     private int dureeFeux;
 
     public Simulateur(Carte c, List<Signalisation> signalisations, List<Vehicule> voitures, double valeurSeconde, int densiteVoiture, long vitesseBoucle, int dureeFeux) {
-        this.affichage = new AffichageSimulateur();
+        this.affichage = new AffichageSimulateurFenetre();
 
         this.c = c;
         this.signalisations = signalisations;
@@ -81,7 +84,11 @@ public class Simulateur extends Thread {
                 Route r = (Route) v.getVoiePrecedente();
                 if (r != null) {
                     double distanceParcourue = v.Avancer(this.valeurSeconde);
-                    r.avancer(v, distanceParcourue);
+                    try {
+                        r.avancer(v, distanceParcourue);
+                    } catch (AvancerException ex) {
+                        this.affichage.ajouterMessage(ex.getMessage());
+                    }
                 } else {
                     vehiculesASupprimer.add(v);
                     this.affichage.ajouterMessage("[+] Ajout d'un véhicule à supprimer : " + v);
@@ -140,8 +147,8 @@ public class Simulateur extends Thread {
     public void setSignalisations(List<Signalisation> signalisations) {
         this.signalisations = signalisations;
     }
-    
-    public List<Vehicule> getListVehicules(){
+
+    public List<Vehicule> getListVehicules() {
         return this.vehicules;
     }
 }
