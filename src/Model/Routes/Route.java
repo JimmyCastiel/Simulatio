@@ -170,7 +170,7 @@ public class Route extends VoieDeCirculation {
                 }
                 if (f != null) {
                     if (f.getCouleurFeu() != CouleurFeu.ROUGE) {
-                        System.out.println("[!!] Avance ! Feu Vert");
+                        //System.out.println("[!!] Avance ! Feu Vert");
                         this.avancerRoute(v);
                     } else {
                         //System.out.println("[!!] Ne peut pas avancer ! Feu Rouge");
