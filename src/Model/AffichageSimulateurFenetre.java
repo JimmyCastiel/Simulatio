@@ -22,7 +22,7 @@ public class AffichageSimulateurFenetre extends AffichageSimulateur {
         this.jt = new JTextArea();
         this.jt.setEnabled(false);
         this.f.add(this.jt);
-        this.jt.setSize(1000, 1000);
+        this.f.setSize(1000, 700);
         this.f.setVisible(true);
         this.jt.setText("");
     }
